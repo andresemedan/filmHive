@@ -7,6 +7,23 @@
               <p><strong>Email</strong>: <%= user.email %></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
+          <!-- This will be in the Projects Submission Page not the profile page.  -->
+          <div>
+            <form method="POST" action="/profile/updateRole?_method=PUT">
+              <label for="selectedRole">Select Role: </label>
+              <select id="selectedRole" name="selectedRole">
+                <option value="director">director</option>
+                <option value="actor">actor</option>
+                <option value="writer">writer</option>
+                <option value="cinematographer">cinematographer</option>
+              </select>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+          <div>
+            <p><a href="/post/createProject">Create a project</a></p>
+          </div>
+          <!-- This should be on a page where you can create your projects -->
           <div class="mt-5">
             <h2>Add a post</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
@@ -27,6 +44,7 @@
           </div>
       </div>
       <div class="col-6">
+        <h2>My Projects</h2>
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
@@ -36,9 +54,9 @@
             </a>
           </li>
         <% } %>
-        </ul>
+      </ul>
         <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
+          <a class="btn btn-primary" href="/feed">Projects Feed</a>
         </div>  
       </div>  
     </div>
