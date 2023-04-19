@@ -1,0 +1,50 @@
+<%- include('partials/header') -%>
+<div class="container">
+  <div class="row mt-5">
+      <div class="col-6">
+          <div>
+              <p><strong>User Name</strong>: <%= user.userName %></p>
+              <p><strong>Email</strong>: <%= user.email %></p>
+              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+          </div>
+            <!-- This will be in the Projects Submission Page not the profile page.  -->
+            <div>
+              <form method="POST" action="/profile/updateRole?_method=PUT">
+                <label for="selectedRole">Select Role: </label>
+                <select id="selectedRole" name="selectedRole">
+                  <option value="director">director</option>
+                  <option value="actor">actor</option>
+                  <option value="writer">writer</option>
+                  <option value="cinematographer">cinematographer</option>
+                </select>
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+            <div class="mt-5">
+              <h2>Create a project</h2>
+              <form action="/project/createProject" enctype="multipart/form-data" method="POST">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="mb-3">
+                  <label for="caption" class="form-label">Caption</label>
+                  <textarea class="form-control" id="caption" name="caption"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="imgUpload" class="form-label">Image</label>
+                  <input type="file" class="form-control" id="imageUpload" name="file">
+                </div>
+                <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+              </form>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-5">
+          <a class="btn btn-primary" href="/profile">Return to Profile</a>
+        </div>  
+      </div>  
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') -%>
