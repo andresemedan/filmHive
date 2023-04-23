@@ -7,8 +7,10 @@
               <p><strong>Email</strong>: <%= user.email %></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
-            <!-- This will be in the Projects Submission Page not the profile page -->
-            <div>
+            <!-- This will be in the Projects Submission Page not the create project page -->
+
+
+            <!-- <div>
               <form method="POST" action="/profile/updateRole?_method=PUT">
                 <label for="selectedRole">Select Role: </label>
                 <select id="selectedRole" name="selectedRole">
@@ -19,7 +21,7 @@
                 </select>
                 <button type="submit">Submit</button>
               </form>
-            </div>
+            </div> -->
             <div class="mt-5">
               <h2>Create a project</h2>
               <form action="/project/createProject" enctype="multipart/form-data" method="POST">
@@ -35,6 +37,13 @@
                   <label for="imgUpload" class="form-label">Image</label>
                   <input type="file" class="form-control" id="imageUpload" name="file">
                 </div>
+
+                <!-- Possible form to upload a script (.doc or .docx file) -->
+
+                <!-- <div class="mb-3">
+                  <label for="fileUpload" class="form-label">File</label>
+                  <input type="file" class="form-control" id="fileUpload" name="file">
+                </div> -->
                 <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
               </form>
             </div>
