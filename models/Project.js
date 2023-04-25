@@ -5,11 +5,14 @@ const ProjectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-
 // Attempting to upload the screen play file. 
-
   // file: {
-  //   type: String
+  //   type: String,
+  //   require: true,
+  // },
+  // fileCloudinaryId: {
+  //   type: String,
+  //   require: true,
   // },
   image: {
     type: String,

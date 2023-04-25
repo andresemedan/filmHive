@@ -51,18 +51,21 @@ module.exports = {
   createProject: async (req, res) => {
     try {
       // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
-
-    // // Upload file to cloudinary
-    // const fileResult = await cloudinary.uploader.upload(req.file.path, {
-    //   resource_type: 'raw',
-    //   raw_convert: 'aspose',
-    // });
+      // const result = await cloudinary.uploader.upload(req.file.path);
+      //// Upload file to cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        public_id: `${Date.now()}-${req.file.originalname}`,
+        resource_type: 'raw',
+        raw_convert: 'aspose',
+      });
+      console.log(result)
+      console.log(req)
 
       //media is stored on cloudainary - the above request responds with url to media and the media id that you will need when deleting content 
       await Project.create({
         title: req.body.title,
-        // file: fileResult.secure_url,  // attempting to upload file
+        // file: fileUpload.secure_url,  // attempting to upload file
+        // fileCloudinaryId: fileUpload.public_id, 
         image: result.secure_url,
         cloudinaryId: result.public_id,
         caption: req.body.caption,
@@ -73,6 +76,7 @@ module.exports = {
       res.redirect("/profile");
     } catch (err) {
       console.log(err);
+      res.status(500).send("Something went wrong");
     }
   },
   likeProject: async (req, res) => {

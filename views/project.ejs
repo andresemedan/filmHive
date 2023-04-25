@@ -3,7 +3,11 @@
   <div class="row justify-content-center mt-5">
     <div class="col-6">
       <h2><%= project.title %></h2>
-      <img class="img-fluid" src="<%= project.image%>" />
+      <% if(project.image.endsWith('.docx')) { %> 
+        <a href="<%= project.image%>"> Screenplay</a>
+      <% } else { %> 
+        <img class="img-fluid" src="<%= project.image%>" />
+     <% } %>      
       <div class="row justify-content-between">
         <form
           class="col-1"
