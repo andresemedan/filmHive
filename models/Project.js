@@ -6,14 +6,14 @@ const ProjectSchema = new mongoose.Schema({
     required: true,
   },
 // Attempting to upload the screen play file. 
-  // file: {
-  //   type: String,
-  //   require: true,
-  // },
-  // fileCloudinaryId: {
-  //   type: String,
-  //   require: true,
-  // },
+  file: {
+    type: String,
+    require: true,
+  },
+  fileCloudinaryId: {
+    type: String,
+    require: true,
+  },
   image: {
     type: String,
     require: true,
