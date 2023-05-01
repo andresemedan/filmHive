@@ -32,6 +32,22 @@
     <div class="col-3 mt-5">
       <p><%= project.caption %></p>
     </div>
+                <!-- This will be in the Projects Submission Page not the create project page -->
+
+
+            <div>
+              <form method="POST" action="/project/submitToProject/<%= project._id %>">
+                <p>Want to join this team?</p>
+                <label for="selectedRole">Select Role: </label>
+                <select id="selectedRole" name="selectedRole">
+                  <option value="director">director</option>
+                  <option value="actor">actor</option>
+                  <option value="writer">writer</option>
+                  <option value="cinematographer">cinematographer</option>
+                </select>
+                <button type="submit">Submit</button>
+              </form>
+            </div>
 
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>

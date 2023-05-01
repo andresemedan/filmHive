@@ -10,12 +10,16 @@ const { ensureAuth } = require("../middleware/auth");
 router.get("/:id", ensureAuth, projectsController.getProject);
 
 
-// router.post("/createProject", upload.single('file'), projectsController.createProject);
 //Enables user to create post w/ cloudinary for media uploads
 router.post("/createProject", upload.fields([{ name: 'imgUpload', maxCount: 1 }, { name: 'fileUpload', maxCount: 1 }]), projectsController.createProject);
 
+// router.post("/createProject", upload.single('file'), projectsController.createProject);
+
 //Enable us to get project feed
 router.get("/feed", ensureAuth, projectsController.getFeed);
+
+//Enables user to submit selected role for a project.
+router.post("/submitToProject/:id", projectsController.submitToProject);
 
 //Enables user to like post. In controller, uses POST model to update likes by 1
 router.put("/likeProject/:id", projectsController.likeProject);

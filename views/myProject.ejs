@@ -7,21 +7,7 @@
               <p><strong>Email</strong>: <%= user.email %></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
-            <!-- This will be in the Projects Submission Page not the create project page -->
 
-
-            <!-- <div>
-              <form method="POST" action="/profile/updateRole?_method=PUT">
-                <label for="selectedRole">Select Role: </label>
-                <select id="selectedRole" name="selectedRole">
-                  <option value="director">director</option>
-                  <option value="actor">actor</option>
-                  <option value="writer">writer</option>
-                  <option value="cinematographer">cinematographer</option>
-                </select>
-                <button type="submit">Submit</button>
-              </form>
-            </div> -->
             <div class="mt-5">
               <h2>Create a project</h2>
               <form action="/project/createProject" enctype="multipart/form-data" method="POST">

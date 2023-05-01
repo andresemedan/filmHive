@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Project = require("../models/Project");
+const Submission = require("../models/Submission")
 
 module.exports = {
   getProfile: async (req, res) => { 
@@ -56,10 +57,8 @@ module.exports = {
       const fileResult = await cloudinary.uploader.upload(req.files['fileUpload'][0].path, {
         public_id: `${Date.now()}-${req.files.fileUpload[0].originalname}`,
         resource_type: 'raw',
-        // raw_convert: 'aspose',
+        // raw_convert: 'aspose', // Use aspose to convert files to pdf. Only 50 free per month. 
       });
-      console.log(result)
-      console.log(req)
 
       //media is stored on cloudainary - the above request responds with url to media and the media id that you will need when deleting content 
       await Project.create({
@@ -77,6 +76,19 @@ module.exports = {
     } catch (err) {
       console.log(err);
       res.status(500).send("Something went wrong");
+    }
+  },
+  submitToProject: async (req, res) => {
+    try {
+      await Submission.create({
+        project: req.params.id,
+        role: req.body.selectedRole,
+        user: req.user.id,
+      });
+      console.log("Submission completed!");
+      res.redirect("/project/"+req.params.id);
+    } catch (err) {
+      console.log(err);
     }
   },
   likeProject: async (req, res) => {
