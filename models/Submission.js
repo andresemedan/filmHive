@@ -4,7 +4,8 @@ const SubmitSchema = new mongoose.Schema({
   role: {
     type: String,
     required: true,
-  },project: {
+  },
+  project: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Project",
   },

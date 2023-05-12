@@ -8,11 +8,9 @@ const ProjectSchema = new mongoose.Schema({
 // Attempting to upload the screen play file. 
   file: {
     type: String,
-    require: true,
-  },
+    },
   fileCloudinaryId: {
     type: String,
-    require: true,
   },
   image: {
     type: String,

@@ -11,7 +11,7 @@ router.get("/profile", ensureAuth, projectsController.getProfile);
 //Enable us to get project feed
 router.get("/feed", ensureAuth, projectsController.getFeed);
 
-router.get("/myProject", ensureAuth, projectsController.getMyProject)
+router.get("/makeProject", ensureAuth, projectsController.getMakeProject)
 
 //Routes for user login/signup
 router.get("/login", authController.getLogin);
