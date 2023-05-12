@@ -49,6 +49,18 @@ module.exports = {
       console.log(err);
     }
   },
+  getMyProject: async (req, res) => {
+    try {
+      //id parameter comes from the post routes
+      //router.get("/:id", ensureAuth, postsController.getPost);
+      //http://localhost:2121/post/631a7f59a3e56acfc7da286f
+      //id === 631a7f59a3e56acfc7da286f
+      const project = await Project.findById(req.params.id);
+      res.render("myProject.ejs", { project: project, user: req.user});
+    } catch (err) {
+      console.log(err);
+    }
+  },
   createProject: async (req, res) => {
     try {
       // Upload image to cloudinary

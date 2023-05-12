@@ -9,6 +9,8 @@ const { ensureAuth } = require("../middleware/auth");
 //post/:id, post/createPost, post/likePost/:id, post/deletePost/:id
 router.get("/:id", ensureAuth, projectsController.getProject);
 
+router.get("/myProject/:id", ensureAuth, projectsController.getMyProject);
+
 
 //Enables user to create post w/ cloudinary for media uploads
 router.post("/createProject", upload.fields([{ name: 'imgUpload', maxCount: 1 }, { name: 'fileUpload', maxCount: 1 }]), projectsController.createProject);
