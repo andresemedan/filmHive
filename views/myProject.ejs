@@ -8,7 +8,19 @@
       <% } else { %> 
         <a style="display:none;"></a>
         <%}%>
-        <img class="img-fluid" src="<%= project.image%>" />    
+        <img class="img-fluid" src="<%= project.image%>" />   
+      <div class="container">
+        <ul>
+          <% for(var i=0; i<submission.length; i++) {%>
+              <% if (submission[i].project == project.id) { %>
+              <li class="col-6 justify-content-between mt-5">
+                <a href="../profile/<%= submission[i].user %> %>"> <%= submission[i].user.userName %> </a>would like to be <%= submission[i].role %>
+              </li>
+              <% } %>
+            <% } %>
+          </ul>
+
+      </div>
       <!-- <div class="row justify-content-between">
         <form
           class="col-1"

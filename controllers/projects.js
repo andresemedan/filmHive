@@ -56,7 +56,8 @@ module.exports = {
       //http://localhost:2121/post/631a7f59a3e56acfc7da286f
       //id === 631a7f59a3e56acfc7da286f
       const project = await Project.findById(req.params.id);
-      res.render("myProject.ejs", { project: project, user: req.user});
+      const submission = await Submission.find({project: req.params.id}).sort({ createdAt: "desc" }).populate('user').lean();
+      res.render("myProject.ejs", { project: project, user: req.user, submission: submission });
     } catch (err) {
       console.log(err);
     }
