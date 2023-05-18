@@ -13,7 +13,6 @@ module.exports = {
       const projects = await Project.find({ user: req.user.id }).populate('user');
       const userProjects = await Project.find({user: req.params.id}).populate('user')
       const userProfile = await User.findById(req.params.id)
-      console.log(userProjects)
       //Sending post data from mongodb and user data to ejs template
       res.render("profile.ejs", { projects: projects, user: req.user, viewedUserId: req.params.id, userProfile: userProfile, userProjects});
     } catch (err) {
