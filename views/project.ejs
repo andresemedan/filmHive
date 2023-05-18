@@ -7,7 +7,7 @@
         <a href="<%= project.file%>"> Screenplay</a>
       <% } else { %> 
         <a style="display:none;"></a>
-        <%}%>
+        <% } %>
         <img class="img-fluid" src="<%= project.image%>" />    
       <div class="row justify-content-between">
         <form
@@ -32,9 +32,6 @@
     <div class="col-3 mt-5">
       <p><%= project.caption %></p>
     </div>
-                <!-- This will be in the Projects Submission Page not the create project page -->
-
-
             <div>
               <form method="POST" action="/project/submitToProject/<%= project._id %>">
                 <p>Want to join this team?</p>
@@ -50,7 +47,7 @@
             </div>
 
     <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
+      <a class="btn btn-primary" href="/profile/<%= project.user._id %>">User Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
   </div>

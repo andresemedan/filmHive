@@ -1,6 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Project = require("../models/Project");
-const Submission = require("../models/Submission")
+const Submission = require("../models/Submission");
+const User = require("../models/User")
 
 module.exports = {
   getProfile: async (req, res) => { 
@@ -9,9 +10,12 @@ module.exports = {
       //Since we have a session each request (req) contains the logged-in users info: req.user
       //console.log(req.user) to see everything
       //Grabbing just the posts of the logged-in user
-      const projects = await Project.find({ user: req.user.id });
+      const projects = await Project.find({ user: req.user.id }).populate('user');
+      const userProjects = await Project.find({user: req.params.id}).populate('user')
+      const userProfile = await User.findById(req.params.id)
+      console.log(userProjects)
       //Sending post data from mongodb and user data to ejs template
-      res.render("profile.ejs", { projects: projects, user: req.user });
+      res.render("profile.ejs", { projects: projects, user: req.user, viewedUserId: req.params.id, userProfile: userProfile, userProjects});
     } catch (err) {
       console.log(err);
     }

@@ -7,7 +7,7 @@ const { ensureAuth } = require("../middleware/auth");
 
 //Main Routes 
 router.get("/", homeController.getIndex);
-router.get("/profile", ensureAuth, projectsController.getProfile);
+router.get("/profile/:id", ensureAuth, projectsController.getProfile);
 //Enable us to get project feed
 router.get("/feed", ensureAuth, projectsController.getFeed);
 
