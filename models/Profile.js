@@ -1,33 +1,25 @@
 const mongoose = require("mongoose");
 
-const ProjectSchema = new mongoose.Schema({
+const ProfileSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
   },
-  file: {
+  profilePic: {
     type: String,
-    require:false,
-    },
-  fileCloudinaryId: {
-    type: String,
-    require: false,
-  },
-  image: {
-    type: String,
-    require: false,
+    require: true,
   },
   cloudinaryId: {
     type: String,
-    require: false,
+    require: true,
   },
-  caption: {
-    type: String,
-    required: true,
+  project: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Project",
   },
-  likes: {
-    type: Number,
-    required: true,
+  submission: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Submission",
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -40,4 +32,4 @@ const ProjectSchema = new mongoose.Schema({
 });
 
 //MongoDB Collection named here - will give lowercase plural of name 
-module.exports = mongoose.model("Project", ProjectSchema);
+module.exports = mongoose.model("Profile", ProfileSchema);

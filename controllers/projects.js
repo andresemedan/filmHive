@@ -67,28 +67,34 @@ module.exports = {
   },
   createProject: async (req, res) => {
     try {
-      // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.files['imgUpload'][0].path);
-      //// Upload file to cloudinary
-      const fileResult = await cloudinary.uploader.upload(req.files['fileUpload'][0].path, {
-        public_id: `${Date.now()}-${req.files.fileUpload[0].originalname}`,
-        resource_type: 'raw',
-        // raw_convert: 'aspose', // Use aspose to convert files to pdf. Only 50 free per month. 
-      });
-
+      let imgResult;
+      let fileResult;
+      console.log(req.user)
+      if(req.files['imgUpload'] && req.files['imgUpload'][0]){
+        // Upload image to cloudinary
+        imgResult = await cloudinary.uploader.upload(req.files['imgUpload'][0].path);
+      }
+      if(req.files['fileUpload'] && req.files['fileUpload'][0]){
+        //// Upload file to cloudinary
+         fileResult = await cloudinary.uploader.upload(req.files['fileUpload'][0].path, {
+          public_id: `${Date.now()}-${req.files.fileUpload[0].originalname}`,
+          resource_type: 'raw',
+          // raw_convert: 'aspose', // Use aspose to convert files to pdf. Only 50 free per month. 
+        });
+      }
       //media is stored on cloudainary - the above request responds with url to media and the media id that you will need when deleting content 
       await Project.create({
         title: req.body.title,
-        file: fileResult.secure_url,  // attempting to upload file
-        fileCloudinaryId: fileResult.public_id, 
-        image: result.secure_url,
-        cloudinaryId: result.public_id,
+        file: fileResult ? fileResult.secure_url : null,  
+        fileCloudinaryId: fileResult ? fileResult.public_id : null, 
+        image: imgResult ? imgResult.secure_url : null,
+        cloudinaryId: imgResult ? imgResult.public_id : null,
         caption: req.body.caption,
         likes: 0,
         user: req.user.id,
       });
       console.log("Post has been added!");
-      res.redirect("/profile");
+      res.redirect(`/profile/${req.user.id}`);
     } catch (err) {
       console.log(err);
       res.status(500).send("Something went wrong");
@@ -127,12 +133,14 @@ module.exports = {
       let project = await Project.findById({ _id: req.params.id });
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(project.cloudinaryId);
+      await cloudinary.uploader.destroy(project.fileCloudinaryId, {resource_type: 'raw'});
       // Delete post from db
       await Project.remove({ _id: req.params.id });
       console.log("Deleted Project");
-      res.redirect("/profile");
+      res.redirect(`/profile/${req.user.id}`);
     } catch (err) {
-      res.redirect("/profile");
+      console.log("Did Not Delete Project")
+      res.redirect(`/profile/${req.user.id}`);
     }
   },
 };
