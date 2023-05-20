@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const upload = require("../middleware/multer");
 const authController = require("../controllers/auth");
 const homeController = require("../controllers/home");
 const projectsController = require("../controllers/projects");
@@ -8,6 +9,7 @@ const { ensureAuth } = require("../middleware/auth");
 //Main Routes 
 router.get("/", homeController.getIndex);
 router.get("/profile/:id", ensureAuth, projectsController.getProfile);
+router.post("/profilePic", upload.single("profilePicUpload"), projectsController.uploadProfilePic)
 //Enable us to get project feed
 router.get("/feed", ensureAuth, projectsController.getFeed);
 

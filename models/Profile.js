@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 
 const ProfileSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
   profilePic: {
     type: String,
     require: true,
@@ -12,14 +8,6 @@ const ProfileSchema = new mongoose.Schema({
   cloudinaryId: {
     type: String,
     require: true,
-  },
-  project: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Project",
-  },
-  submission: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Submission",
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,

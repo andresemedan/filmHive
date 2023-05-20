@@ -2,7 +2,22 @@
 <div class="container">
   <div class="row mt-5">
       <div class="col-6">
+        <% if (profile && profile.length > 0 && profile[0].user && profile[0].user._id && profile[0].user._id.toString() === viewedUserId.toString()) { %>
+          <% if (profile[0].profilePic) { %>
+            <img class="rounded-circle" src="<%= profile[0].profilePic %>" alt="">
+          <% } %>
+        <% } %>
         <% if (user && viewedUserId && user._id.toString() === viewedUserId.toString()) { %>
+          <form action="/profilePic" enctype="multipart/form-data" method="POST">
+            <div class="mb-3">
+              <label for="profilePicUpload" class="form-label">Image</label>
+              <input type="file" class="form-control" id="profilePicUpload" name="profilePicUpload">
+            </div>
+            <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+          </form>
+        </div>
+    </div>
+
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
