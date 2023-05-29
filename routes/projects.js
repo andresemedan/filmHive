@@ -24,7 +24,10 @@ router.put("/likeProject/:id", projectsController.likeProject);
 
 router.put("/acceptRole/:id", projectsController.acceptRole)
 
+router.put("/rejectRole/:id", projectsController.rejectRole);
+
 //Enables user to delete post. In controller, uses POST model to delete post from MongoDB collection
 router.delete("/deleteProject/:id", projectsController.deleteProject);
+
 
 module.exports = router;

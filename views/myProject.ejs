@@ -16,17 +16,24 @@
               <li class="col-6 justify-content-between mt-5">
                 <a href="/profile/<%= submission[i].user._id %>"> <%= submission[i].user.userName %> </a>would like to be <%= submission[i].role %>
                 <form
-                action="/projects/acceptRole/<%=submission[i]._id%>?_method=PUT"
+                action="/project/acceptRole/<%=submission[i]._id%>?_method=PUT"
                 method="POST"
                 class="col-3"
-              >
+                >
                 <button class="btn btn-primary" type="submit">
                   <i class="fa fa-check"></i>
                 </button>
                 </form>
+                
+                <form
+                action="/project/rejectRole/<%=submission[i]._id%>?_method=PUT"
+                method="POST"
+                class="col-3"
+                >
                 <button class="btn btn-primary" type="submit">
                   <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
+                </form>
               </li>
               <% } %>
             <% } %>

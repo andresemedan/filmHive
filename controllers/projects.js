@@ -171,15 +171,28 @@ module.exports = {
   },
   acceptRole: async (req, res)=>{
     try{
-        await Submission.findOneAndUpdate({_id: req.params.id},{
+       let submission = await Submission.findOneAndUpdate({_id: req.params.id},{
             status: true
         })
+        console.log("HERE" + submission.project)
         console.log('Role Accepted')
-        res.redirect(`/project/myProject/${req.params.id}`);
+        res.redirect(`/project/myProject/${submission.project}`);
     }catch(err){
         console.log(err)
     }
   },
+  rejectRole: async (req, res) => {
+    try{
+      let submission = await Submission.findOneAndUpdate({_id: req.params.id},{
+           status: null
+       })
+       console.log("HERE" + submission.project)
+       console.log('Role Accepted')
+       res.redirect(`/project/myProject/${submission.project}`);
+   }catch(err){
+       console.log(err)
+   }
+ },
   likeProject: async (req, res) => {
     try {
       await Project.findOneAndUpdate(
