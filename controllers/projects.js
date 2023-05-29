@@ -1,36 +1,50 @@
 const cloudinary = require("../middleware/cloudinary");
 const Project = require("../models/Project");
 const Submission = require("../models/Submission");
-const User = require("../models/User")
-const Profile = require("../models/Profile")
+const User = require("../models/User");
+const Profile = require("../models/Profile");
 
 module.exports = {
-  getProfile: async (req, res) => { 
-    console.log(req.user)
+  getProfile: async (req, res) => {
+    console.log(req.user);
     try {
       //Since we have a session each request (req) contains the logged-in users info: req.user
       //console.log(req.user) to see everything
       //Grabbing just the posts of the logged-in user
-      const projects = await Project.find({ user: req.user.id }).populate('user');
-      const userProjects = await Project.find({user: req.params.id}).populate('user')
-      const userProfile = await User.findById(req.params.id)
-      const profile = await Profile.find({user: req.params.id}).populate('user').sort({ createdAt: "desc" }).lean();
+      const projects = await Project.find({ user: req.user.id }).populate(
+        "user"
+      );
+      const userProjects = await Project.find({ user: req.params.id }).populate(
+        "user"
+      );
+      const userProfile = await User.findById(req.params.id);
+      const profile = await Profile.find({ user: req.params.id })
+        .populate("user")
+        .sort({ createdAt: "desc" })
+        .lean();
 
       //Sending post data from mongodb and user data to ejs template
-      res.render("profile.ejs", { projects: projects, user: req.user, viewedUserId: req.params.id, userProfile: userProfile, userProjects: userProjects, profile: profile});
+      res.render("profile.ejs", {
+        projects: projects,
+        user: req.user,
+        viewedUserId: req.params.id,
+        userProfile: userProfile,
+        userProjects: userProjects,
+        profile: profile,
+      });
     } catch (err) {
       console.log(err);
     }
   },
   uploadProfilePic: async (req, res) => {
     try {
-      console.log(req.file)
-      let result = await cloudinary.uploader.upload(req.file.path)
+      console.log(req.file);
+      let result = await cloudinary.uploader.upload(req.file.path);
 
-      //media is stored on cloudainary - the above request responds with url to media and the media id that you will need when deleting content 
+      //media is stored on cloudainary - the above request responds with url to media and the media id that you will need when deleting content
       await Profile.create({
-        profilePic: result.secure_url, 
-        cloudinaryId: result.public_id, 
+        profilePic: result.secure_url,
+        cloudinaryId: result.public_id,
         user: req.user.id,
       });
       console.log("Profile picture has been added!");
@@ -40,8 +54,8 @@ module.exports = {
       res.status(500).send("Something went wrong");
     }
   },
-  getMakeProject: async (req, res) => { 
-    console.log(req.user)
+  getMakeProject: async (req, res) => {
+    console.log(req.user);
     try {
       //Since we have a session each request (req) contains the logged-in users info: req.user
       //console.log(req.user) to see everything
@@ -67,9 +81,15 @@ module.exports = {
       //router.get("/:id", ensureAuth, postsController.getPost);
       //http://localhost:2121/post/631a7f59a3e56acfc7da286f
       //id === 631a7f59a3e56acfc7da286f
-      const project = await Project.findById(req.params.id);
-      const submission = await Submission.find({project: req.params.id}).populate('user')
-      res.render("project.ejs", { project: project, user: req.user, submission: submission});
+      const project = await Project.findById(req.params.id).populate("user");
+      const submissions = await Submission.find({
+        project: req.params.id,
+      }).populate("user");
+      res.render("project.ejs", {
+        project: project,
+        user: req.user,
+        submissions: submissions,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -81,8 +101,16 @@ module.exports = {
       //http://localhost:2121/post/631a7f59a3e56acfc7da286f
       //id === 631a7f59a3e56acfc7da286f
       const project = await Project.findById(req.params.id);
-      const submission = await Submission.find({project: req.params.id}).sort({ createdAt: "desc" }).populate('user').lean();
-      res.render("myProject.ejs", { project: project, user: req.user, submission: submission });
+      const submission = await Submission.find({ project: req.params.id })
+        .sort({ createdAt: "desc" })
+        .populate("user")
+        .lean();
+      res.render("myProject.ejs", {
+        project: project,
+        user: req.user,
+        submission: submission,
+      });
+      console.log(submission);
     } catch (err) {
       console.log(err);
     }
@@ -91,24 +119,29 @@ module.exports = {
     try {
       let imgResult;
       let fileResult;
-      console.log(req.user)
-      if(req.files['imgUpload'] && req.files['imgUpload'][0]){
+      console.log(req.user);
+      if (req.files["imgUpload"] && req.files["imgUpload"][0]) {
         // Upload image to cloudinary
-        imgResult = await cloudinary.uploader.upload(req.files['imgUpload'][0].path);
+        imgResult = await cloudinary.uploader.upload(
+          req.files["imgUpload"][0].path
+        );
       }
-      if(req.files['fileUpload'] && req.files['fileUpload'][0]){
+      if (req.files["fileUpload"] && req.files["fileUpload"][0]) {
         //// Upload file to cloudinary
-         fileResult = await cloudinary.uploader.upload(req.files['fileUpload'][0].path, {
-          public_id: `${Date.now()}-${req.files.fileUpload[0].originalname}`,
-          resource_type: 'raw',
-          // raw_convert: 'aspose', // Use aspose to convert files to pdf. Only 50 free per month. 
-        });
+        fileResult = await cloudinary.uploader.upload(
+          req.files["fileUpload"][0].path,
+          {
+            public_id: `${Date.now()}-${req.files.fileUpload[0].originalname}`,
+            resource_type: "raw",
+            // raw_convert: 'aspose', // Use aspose to convert files to pdf. Only 50 free per month.
+          }
+        );
       }
-      //media is stored on cloudainary - the above request responds with url to media and the media id that you will need when deleting content 
+      //media is stored on cloudainary - the above request responds with url to media and the media id that you will need when deleting content
       await Project.create({
         title: req.body.title,
-        file: fileResult ? fileResult.secure_url : null,  
-        fileCloudinaryId: fileResult ? fileResult.public_id : null, 
+        file: fileResult ? fileResult.secure_url : null,
+        fileCloudinaryId: fileResult ? fileResult.public_id : null,
         image: imgResult ? imgResult.secure_url : null,
         cloudinaryId: imgResult ? imgResult.public_id : null,
         caption: req.body.caption,
@@ -125,14 +158,26 @@ module.exports = {
   submitToProject: async (req, res) => {
     try {
       await Submission.create({
-        project: req.params.id,
         role: req.body.selectedRole,
+        status: false,
+        project: req.params.id,
         user: req.user.id,
       });
       console.log("Submission completed!");
-      res.redirect("/project/"+req.params.id);
+      res.redirect("/project/" + req.params.id);
     } catch (err) {
       console.log(err);
+    }
+  },
+  acceptRole: async (req, res)=>{
+    try{
+        await Submission.findOneAndUpdate({_id: req.params.id},{
+            status: true
+        })
+        console.log('Role Accepted')
+        res.redirect(`/project/myProject/${req.params.id}`);
+    }catch(err){
+        console.log(err)
     }
   },
   likeProject: async (req, res) => {
@@ -155,13 +200,15 @@ module.exports = {
       let project = await Project.findById({ _id: req.params.id });
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(project.cloudinaryId);
-      await cloudinary.uploader.destroy(project.fileCloudinaryId, {resource_type: 'raw'});
+      await cloudinary.uploader.destroy(project.fileCloudinaryId, {
+        resource_type: "raw",
+      });
       // Delete post from db
       await Project.remove({ _id: req.params.id });
       console.log("Deleted Project");
       res.redirect(`/profile/${req.user.id}`);
     } catch (err) {
-      console.log("Did Not Delete Project")
+      console.log("Did Not Delete Project");
       res.redirect(`/profile/${req.user.id}`);
     }
   },

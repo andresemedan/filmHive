@@ -5,6 +5,10 @@ const SubmitSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  status: {
+    type: Boolean,
+    required: true,
+  },
   project: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Project",

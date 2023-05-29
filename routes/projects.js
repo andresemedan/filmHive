@@ -22,6 +22,8 @@ router.post("/submitToProject/:id", projectsController.submitToProject);
 //Enables user to like post. In controller, uses POST model to update likes by 1
 router.put("/likeProject/:id", projectsController.likeProject);
 
+router.put("/acceptRole/:id", projectsController.acceptRole)
+
 //Enables user to delete post. In controller, uses POST model to delete post from MongoDB collection
 router.delete("/deleteProject/:id", projectsController.deleteProject);
 

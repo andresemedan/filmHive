@@ -1,0 +1,24 @@
+.profile-pic-container {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 1px solid black;
+  position: relative;
+  overflow: hidden;
+}
+.profile-pic {
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.project-image {
+  max-width: 30%;
+}

@@ -4,11 +4,11 @@
     <div class="col-6">
       <h2><%= project.title %></h2>
       <% if(project.file) { %> 
-        <a href="<%= project.file%>"> Screenplay</a>
+        <a href="<%= project.file %>"> Screenplay</a>
       <% } else { %> 
         <a style="display:none;"></a>
         <% } %>
-        <img class="img-fluid" src="<%= project.image%>" />    
+        <img class="img-fluid project-image" src="<%= project.image %>" />    
       <div class="row justify-content-between">
         <form
           class="col-1"
@@ -33,27 +33,32 @@
       <p><%= project.caption %></p>
     </div>
     <div>
-    <% for(i = 0; i<submission.length; i++){ %>
-      <%if(project.id.toString() === submission[i].project.toString()) { %>
-        <p>You have submitted to as <%= submission[i].role %></p>
+
+    <% let userHasSubmitted = false %>
+    <% for(i = 0; i<submissions.length; i++){ %>
+      <%if(user._id.toString() === submissions[i].user._id.toString()) { %>
+        <% userHasSubmitted = true %>
+        <p>You have submitted as <%= submissions[i].role %></p>
         <% } %>
     <% } %>
-    <% if(submission.length === 0) { %>
-              <form method="POST" action="/project/submitToProject/<%= project._id %>">
-                <p>Want to join this team?</p>
-                <label for="selectedRole">Select Role: </label>
-                <select id="selectedRole" name="selectedRole">
-                  <option value="director">director</option>
-                  <option value="actor">actor</option>
-                  <option value="writer">writer</option>
-                  <option value="cinematographer">cinematographer</option>
-                </select>
-                <button type="submit">Submit</button>
-              </form>
-              <% } %>
-            </div>
+
+    <% if(!userHasSubmitted) { %>
+      <form method="POST" action="/project/submitToProject/<%= project._id %>">
+        <p>Want to join this team?</p>
+        <label for="selectedRole">Select Role: </label>
+        <select id="selectedRole" name="selectedRole">
+          <option value="director">director</option>
+          <option value="actor">actor</option>
+          <option value="writer">writer</option>
+          <option value="cinematographer">cinematographer</option>
+        </select>
+        <button type="submit">Submit</button>
+      </form>
+      <% } %>
+
+    </div>
     <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile/<%= project.user._id %>">User Profile</a>
+      <a class="btn btn-primary" href="/profile/<%= project.user._id %>"><%= project.user.userName %>'s Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
   </div>
