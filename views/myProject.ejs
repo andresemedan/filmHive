@@ -13,7 +13,8 @@
         <ul>
           <% for(var i=0; i<submission.length; i++) {%>
               <% if (submission && submission[i].project == project.id) { %>
-              <li class="col-6 justify-content-between mt-5">
+              <li class="col-6 justify-content-between mt-5 
+              <%= submission[i].status === null ? 'role-rejected' : submission[i].status === true ? 'role-accepted' : '' %>">
                 <a href="/profile/<%= submission[i].user._id %>"> <%= submission[i].user.userName %> </a>would like to be <%= submission[i].role %>
                 <form
                 action="/project/acceptRole/<%=submission[i]._id%>?_method=PUT"

@@ -22,3 +22,11 @@
 .project-image {
   max-width: 30%;
 }
+
+.role-rejected {
+  color: red;
+}
+
+.role-accepted {
+  color: rgb(14, 214, 24);
+}
