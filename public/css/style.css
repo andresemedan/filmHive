@@ -30,3 +30,11 @@
 .role-accepted {
   color: rgb(14, 214, 24);
 }
+
+.none {
+  display: none;
+}
+
+.li-block {
+  display: block;
+}

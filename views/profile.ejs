@@ -19,7 +19,6 @@
           </form>
         </div>
     </div>
-
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
@@ -62,6 +61,21 @@
         <% } %>
       </ul>
           <% } %>
+          
+      <% if (user && viewedUserId && user._id.toString() === viewedUserId.toString()) { %>
+        <div class="col-6">
+          <h2>Notifications</h2>
+          <% for(i=0;i<submissions.length;i++)  { %>
+            <ul>
+              <li>
+                <span class="li-block">Project: <a href="/project/<%=submissions[i].project._id %>"><%= submissions[i].project.title %></a></span>
+                <span class="li-block">Role: <%= submissions[i].role %></span>
+                <span class="li-block">Submission Status: <%= submissions[i].status === null ? 'Not Selected' : submissions[i].status === true ? 'Selected' : 'Pending' %></span>
+              </li>
+            </ul>
+          <% } %>
+        </div>
+      <% } %>
           
         <div class="row justify-content-center mt-5">
           <a class="btn btn-primary" href="/feed">Projects Feed</a>
