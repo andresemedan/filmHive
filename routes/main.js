@@ -10,8 +10,10 @@ const { ensureAuth } = require("../middleware/auth");
 
 //Main Routes 
 router.get("/", homeController.getIndex);
+router.get("/profile/homeProfile", ensureAuth, profileController.getHomeProfile);
 router.get("/profile/:id", ensureAuth, profileController.getProfile);
 router.post("/profilePic", upload.single("profilePicUpload"), profileController.uploadProfilePic)
+
 //Enable us to get project feed
 router.get("/feed", ensureAuth, feedController.getFeed);
 

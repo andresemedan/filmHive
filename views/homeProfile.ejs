@@ -2,14 +2,18 @@
 <div class="container">
   <div class="row mt-5">
       <div class="col-6">
-        <% if (profile && profile.length > 0 && profile[0].user && profile[0].user._id && profile[0].user._id.toString() === viewedUserId.toString()) { %>
-          <% if (profile[0].profilePic) { %>
+
+        <% for(i=0; i < profile.length; i++){ %>
+          <% if(profile[i].user._id.toString() === user._id.toString()) {%>
             <div class="profile-pic-container">
-              <img class="profile-pic" src="<%= profile[0].profilePic %>" alt="">
+              <img class="profile-pic" src="<%= profile[i].profilePic %>" alt="">
             </div>
-          <% } %>
-        <% } %>
-       <!--  <% if (user && viewedUserId && user._id.toString() === viewedUserId.toString()) { %>
+            <% break %>
+            <% } else { %>
+              null
+              <% } %>
+       <% } %>
+
           <form action="/profilePic" enctype="multipart/form-data" method="POST">
             <div class="mb-3">
               <label for="profilePicUpload" class="form-label">Image</label>
@@ -27,9 +31,8 @@
             <div class="row justify-content-center mt-5">
               <a class="btn btn-primary" href="/makeProject">Create a project</a>
             </div>  
-             This should be on a page where you can create your projects -->
            
-        <!-- <div class="col-6">
+        <div class="col-6">
           <h2>My Projects</h2>
           <ul class="row list-unstyled">
           <% for(var i=0; i<projects.length; i++) {%>
@@ -41,28 +44,6 @@
             </li>
           <% } %>
         </ul>
-        <% } else { %> --> 
-      <div>
-          <p><strong>User Name</strong>: <%= userProfile.userName %></p>
-          <p><strong>Email</strong>: <%= userProfile.email %></p>
-          <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-      </div>
-         
-      <div class="col-6">
-        <h2>Projects</h2>
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<userProjects.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/project/<%= userProjects[i]._id%>">
-              <h2><%= userProjects[i].title%></h2>
-              <img class="img-fluid" src="<%= userProjects[i].image%>">
-            </a>
-          </li>
-        <% } %>
-      </ul>
-          <!-- <% } %> -->
-          
-      <!-- <% if (user && viewedUserId && user._id.toString() === viewedUserId.toString()) { %>
         <div class="col-6">
           <h2>Notifications</h2>
           <% for(i=0;i<submissions.length;i++)  { %>
@@ -75,8 +56,7 @@
             </ul>
           <% } %>
         </div>
-      <% } %> -->
-          
+         
         <div class="row justify-content-center mt-5">
           <a class="btn btn-primary" href="/feed">Projects Feed</a>
         </div>  

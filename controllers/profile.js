@@ -25,6 +25,7 @@ module.exports = {
         const submissions = await Submission.find({
             user: req.params.id,
           }).populate("user").populate("project").sort({ createdAt: "desc" }).lean();
+          console.log("************  " + profile)
   
         //Sending post data from mongodb and user data to ejs template
         res.render("profile.ejs", {
@@ -33,6 +34,31 @@ module.exports = {
           viewedUserId: req.params.id,
           userProfile: userProfile,
           userProjects: userProjects,
+          profile: profile,
+          submissions: submissions,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    getHomeProfile: async (req, res) => {
+      console.log(req.user);
+      try {
+        //Since we have a session each request (req) contains the logged-in users info: req.user
+        //console.log(req.user) to see everything
+        //Grabbing just the posts of the logged-in user
+        const projects = await Project.find({user: req.user.id}).populate("user");
+
+        const profile = await Profile.find({user: req.user.id})
+          .populate("user")
+          .sort({ createdAt: "desc" })
+          .lean();
+        const submissions = await Submission.find({user: req.user.id}).populate("user").populate("project").sort({ createdAt: "desc" }).lean();
+  
+        //Sending post data from mongodb and user data to ejs template
+        res.render("homeProfile.ejs", {
+          projects: projects,
+          user: req.user,
           profile: profile,
           submissions: submissions,
         });
@@ -52,7 +78,7 @@ module.exports = {
           user: req.user.id,
         });
         console.log("Profile picture has been added!");
-        res.redirect(`/profile/${req.user.id}`);
+        res.redirect("/profile/homeProfile");
       } catch (err) {
         console.log(err);
         res.status(500).send("Something went wrong");
