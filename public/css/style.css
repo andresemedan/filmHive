@@ -31,6 +31,14 @@
   color: rgb(14, 214, 24);
 }
 
+.submit-icons {
+  display:inline-block;
+}
+.submit-icons button {
+  width: 2.5rem;
+
+}
+
 .none {
   display: none;
 }

@@ -8,13 +8,13 @@ module.exports = multer({
   // Was not working before, will add file filters later.
 
   
-  // fileFilter: (req, file, cb) => {
-  //   let ext = path.extname(file.originalname);
-  //   if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png" && ext !== ".doc" && ext !== ".docx") {
-  //     console.log(ext)
-  //     cb(new Error("File type is not supported"), false);
-  //     return;
-  //   }
-  //   cb(null, true);
-  // },
+  fileFilter: (req, file, cb) => {
+    let ext = path.extname(file.originalname);
+    if (ext.toLowerCase() !== ".jpg" && ext.toLowerCase() !== ".jpeg" && ext.toLowerCase() !== ".png" && ext.toLowerCase() !== ".doc" && ext.toLowerCase() !== ".docx") {
+      console.log(ext)
+      cb(new Error("File type is not supported"), false);
+      return;
+    }
+    cb(null, true);
+  },
 });

@@ -25,7 +25,6 @@ module.exports = {
         const submissions = await Submission.find({
             user: req.params.id,
           }).populate("user").populate("project").sort({ createdAt: "desc" }).lean();
-          console.log("************  " + profile)
   
         //Sending post data from mongodb and user data to ejs template
         res.render("profile.ejs", {

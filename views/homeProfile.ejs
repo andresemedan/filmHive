@@ -1,18 +1,17 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row mt-5">
-      <div class="col-6">
-
+      <div class="col-lg-8">
         <% for(i=0; i < profile.length; i++){ %>
           <% if(profile[i].user._id.toString() === user._id.toString()) {%>
             <div class="profile-pic-container">
               <img class="profile-pic" src="<%= profile[i].profilePic %>" alt="">
             </div>
-            <% break %>
+              <% break %>
             <% } else { %>
-              null
-              <% } %>
-       <% } %>
+               null
+            <% } %>
+        <% } %>
 
           <form action="/profilePic" enctype="multipart/form-data" method="POST">
             <div class="mb-3">
@@ -22,16 +21,16 @@
             <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
           </form>
         </div>
+  </div>
+    <div>
+        <p><strong>User Name</strong>: <%= user.userName %></p>
+        <p><strong>Email</strong>: <%= user.email %></p>
+        <a href="/logout" class="col-3 btn btn-primary">Logout</a>
     </div>
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-          </div>
-            <div class="row justify-content-center mt-5">
-              <a class="btn btn-primary" href="/makeProject">Create a project</a>
-            </div>  
-           
+    <div class="row justify-content-center mt-5">
+      <a class="btn btn-primary" href="/makeProject">Create a project</a>
+    </div>  
+    <div class="row mt-5">     
         <div class="col-6">
           <h2>My Projects</h2>
           <ul class="row list-unstyled">
@@ -44,18 +43,27 @@
             </li>
           <% } %>
         </ul>
-        <div class="col-6">
+      </div>
+      
           <h2>Notifications</h2>
           <% for(i=0;i<submissions.length;i++)  { %>
             <ul>
               <li>
-                <span class="li-block">Project: <a href="/project/<%=submissions[i].project._id %>"><%= submissions[i].project.title %></a></span>
+                <span class="li-block">Project: <a href="/project/<%= submissions[i].status === true ? 'projectPage/' + submissions[i].project._id : submissions[i].project._id %>"><%= submissions[i].project.title %></a></span>
                 <span class="li-block">Role: <%= submissions[i].role %></span>
                 <span class="li-block">Submission Status: <%= submissions[i].status === null ? 'Not Selected' : submissions[i].status === true ? 'Selected' : 'Pending' %></span>
               </li>
             </ul>
           <% } %>
         </div>
+
+        <div class="row mt-5">
+          <div class="col-6">
+            <h2>Media</h2>
+            <!-- Add your media content here -->
+          </div>
+        </div>
+
          
         <div class="row justify-content-center mt-5">
           <a class="btn btn-primary" href="/feed">Projects Feed</a>

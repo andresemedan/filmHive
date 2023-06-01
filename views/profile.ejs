@@ -1,7 +1,7 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row mt-5">
-      <div class="col-6">
+      <div class="col">
         <% if (profile && profile.length > 0 && profile[0].user && profile[0].user._id && profile[0].user._id.toString() === viewedUserId.toString()) { %>
           <% if (profile[0].profilePic) { %>
             <div class="profile-pic-container">
@@ -48,7 +48,7 @@
           <a href="/logout" class="col-3 btn btn-primary">Logout</a>
       </div>
          
-      <div class="col-6">
+      <div class="col">
         <h2>Projects</h2>
         <ul class="row list-unstyled">
         <% for(var i=0; i<userProjects.length; i++) {%>

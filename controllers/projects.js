@@ -37,6 +37,26 @@ module.exports = {
       console.log(err);
     }
   },
+  getProjectPage: async (req, res) => {
+    try {
+      //id parameter comes from the post routes
+      //router.get("/:id", ensureAuth, postsController.getPost);
+      //http://localhost:2121/post/631a7f59a3e56acfc7da286f
+      //id === 631a7f59a3e56acfc7da286f
+      const project = await Project.findById(req.params.id).populate("user");
+      const submissions = await Submission.find({
+        project: req.params.id,
+      }).populate("user");
+      res.render("projectPage.ejs", {
+        project: project,
+        user: req.user,
+        submissions: submissions,
+      });
+      console.log(submissions)
+    } catch (err) {
+      console.log(err);
+    }
+  },
   getMyProject: async (req, res) => {
     try {
       //id parameter comes from the post routes
@@ -53,7 +73,7 @@ module.exports = {
         user: req.user,
         submission: submission,
       });
-      console.log(submission);
+
     } catch (err) {
       console.log(err);
     }
@@ -92,7 +112,7 @@ module.exports = {
         user: req.user.id,
       });
       console.log("Post has been added!");
-      res.redirect(`/profile/${req.user.id}`);
+      res.redirect('/profile/homeProfile');
     } catch (err) {
       console.log(err);
       res.status(500).send("Something went wrong");
@@ -114,20 +134,35 @@ module.exports = {
   },
   deleteProject: async (req, res) => {
     try {
-      // Find post by id
-      let project = await Project.findById({ _id: req.params.id });
-      // Delete image from cloudinary
-      await cloudinary.uploader.destroy(project.cloudinaryId);
-      await cloudinary.uploader.destroy(project.fileCloudinaryId, {
-        resource_type: "raw",
-      });
-      // Delete post from db
-      await Project.remove({ _id: req.params.id });
+      // Find project by id
+      let project = await Project.findById(req.params.id);
+  
+      if (!project) {
+        console.log("Project not found");
+        res.redirect('/profile/homeProfile');
+        return;
+      }
+  
+      // Delete image from cloudinary (if it exists)
+      if (project.cloudinaryId) {
+        await cloudinary.uploader.destroy(project.cloudinaryId);
+      }
+      
+      // Delete file from cloudinary (if it exists)
+      if (project.fileCloudinaryId) {
+        await cloudinary.uploader.destroy(project.fileCloudinaryId, {
+          resource_type: "raw",
+        });
+      }
+  
+      // Delete project from the database
+      await Project.deleteOne({ _id: req.params.id });
+  
       console.log("Deleted Project");
-      res.redirect(`/profile/${req.user.id}`);
+      res.redirect('/profile/homeProfile');
     } catch (err) {
-      console.log("Did Not Delete Project");
-      res.redirect(`/profile/${req.user.id}`);
+      console.log("Error deleting project:", err);
+      res.redirect('/profile/homeProfile');
     }
   },
 };
