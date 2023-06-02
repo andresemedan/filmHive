@@ -4,14 +4,16 @@
     <% for(var i=0; i<projects.length; i++) {%>
       <div class="col mt-5">
         <div class="d-flex justify-content-center">
-          <div class="card col-lg-4 col-md-6 col-sm-12 col-12 shadow-sm mb-5 rounded">
+          <div class="card col-lg-6 col-md-8 col-sm-12 col-12 shadow-sm mb-5 rounded">
             <% if(projects[i].user == user.id){ %>
               <a class="logline" href="/project/myProject/<%= projects[i]._id%>">
             <% } else { %>
               <a class="logline" href="/project/<%= projects[i]._id%>">
             <% } %>
               <!-- <img src="<%= projects[i].image%>" class="card-img-top card-img" alt="project image"> -->
-              <div class="card-body p-0">
+
+              <div class="card-body p-0 d-flex">
+                <div class="card-info">
                 <div class="card-title-section">
                   <h5 class="card-title"><%= projects[i].title %></h5>
                 </div>
@@ -19,6 +21,14 @@
                   <p class="card-text"><%= projects[i].caption %></p>
                 <span class="">Created by: <%= projects[i].user.userName %></span>
                 </div>
+              </div>
+
+                <div class="card-submissions">
+                  <ul>
+                    <li>hi</li>
+                    <li>hi there 2</li>
+                  </ul>
+               </div>
               </div>
             </div>
           </div>

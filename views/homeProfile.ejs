@@ -1,7 +1,7 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-6 profile-pic-container">
+    <div class="col-md-4 profile-pic-container">
       <div class="profile-pic-upload-container">
         <% let userHasProfilePic = false %>
         <% for (i = 0; i < profile.length; i++) { %>
@@ -15,7 +15,7 @@
         <% } %>
   
         <% if (!userHasProfilePic) { %>
-          <!-- Display a placeholder or default image if user does not have a profile picture -->
+<!-- Display a placeholder or default image if user does not have a profile picture -->
           <div class="profile-pic-preview">
             <img class="profile-pic" src="path_to_default_image.jpg" alt="Default Profile Picture">
           </div>
@@ -30,8 +30,10 @@
         </div>
       </div>
     </div>
-    <!-- BIO -->
-    <div class="col-md-6 bio">
+<!-- BIO -->
+<div class="col-md-8 bio-pic-container">
+  <div class="bio-pic-upload-container">
+    <div class="col-lg-8 col-md-12 col-sm-10 bio rounded">
       <% if (user.bio) { %>
         <!-- Display user's bio if it exists -->
         <span><%= user.bio %></span>
@@ -39,7 +41,16 @@
         <!-- Display a message if the user's bio is empty -->
         <span>No bio available.</span>
       <% } %>
+      <div class="bio-pic-edit">
+        <form id="profilePicForm" action="/profilePic" enctype="multipart/form-data" method="POST">
+          <input type="file" class="form-control profile-pic-input" id="profilePicUpload" name="profilePicUpload">
+          <label for="profilePicUpload" class="form-label"><i class="fas fa-edit"></i></label>
+          <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+        </form>
+      </div>
     </div>
+  </div>
+</div> 
   </div>
  
     <div class="mt-4">
@@ -154,6 +165,7 @@
         </ul>
       </div>
 
+      <!-- Section to display Users self submitted media. Headshots, Writing Samples etc... -->
       <div class="col-md-6">
         <h2>My Media</h2>
       
