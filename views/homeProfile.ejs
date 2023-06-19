@@ -1,26 +1,27 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row mt-5">
-      <div class="col-lg-8">
+      <div class="col-lg-8 profile-pic-container">
+        <div class="profile-pic-upload-container">
         <% for(i=0; i < profile.length; i++){ %>
           <% if(profile[i].user._id.toString() === user._id.toString()) {%>
-            <div class="profile-pic-container">
-              <img class="profile-pic" src="<%= profile[i].profilePic %>" alt="">
+            <div class="profile-pic-preview">
+              <img class="profile-pic" src="<%= profile[i].profilePic %>" alt="Profile Picture">
             </div>
               <% break %>
             <% } else { %>
                null
             <% } %>
         <% } %>
-
-          <form action="/profilePic" enctype="multipart/form-data" method="POST">
-            <div class="mb-3">
-              <label for="profilePicUpload" class="form-label">Image</label>
-              <input type="file" class="form-control" id="profilePicUpload" name="profilePicUpload">
-            </div>
-            <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-          </form>
+        <div class="profile-pic-edit">
+          <form id="profilePicForm" action="/profilePic" enctype="multipart/form-data" method="POST">
+              <input type="file" class="form-control profile-pic-input" id="profilePicUpload" name="profilePicUpload">
+              <label for="profilePicUpload" class="form-label"><i class="fas fa-edit"></i></label>
+              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+           </form>
+          </div>
         </div>
+      </div>
   </div>
     <div>
         <p><strong>User Name</strong>: <%= user.userName %></p>
@@ -72,4 +73,5 @@
     </div>
   </div>
 </div>
+<script src="/js/homeProfile.js"></script>
 <%- include('partials/footer') -%>

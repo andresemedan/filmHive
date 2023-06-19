@@ -5,7 +5,9 @@
         <% if (profile && profile.length > 0 && profile[0].user && profile[0].user._id && profile[0].user._id.toString() === viewedUserId.toString()) { %>
           <% if (profile[0].profilePic) { %>
             <div class="profile-pic-container">
+              <div class="profile-pic-preview">
               <img class="profile-pic" src="<%= profile[0].profilePic %>" alt="">
+              </div>
             </div>
           <% } %>
         <% } %>
