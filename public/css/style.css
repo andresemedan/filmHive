@@ -6,8 +6,8 @@
   max-width: 205px;
   /* margin: 50px auto; */
 }
-
-.profile-pic-container .profile-pic-edit input, .profile-pic-container button{
+.profile-pic-container .profile-pic-edit input,
+.profile-pic-container button {
   display: none;
 }
 /* Div around the profile pic edit circle
@@ -19,8 +19,6 @@
   z-index: 1;
   bottom: 10px;
 }
-
-
 .profile-pic-preview {
   width: 200px;
   height: 200px;
@@ -41,23 +39,20 @@
   top: 50%;
   transform: translate(-50%, -50%);
 }
-
 .profile-pic-container .profile-pic-edit input + label {
   display: inline-block;
-  position:relative;
+  position: relative;
   width: 34px;
   height: 34px;
   margin-bottom: 0;
   border-radius: 100%;
-  background: #FFFFFF;
+  background: #ffffff;
   border: 1px solid transparent;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
   cursor: pointer;
   font-weight: normal;
   transition: all 0.2s ease-in-out;
 }
-
-
 .profile-pic-container .profile-pic-edit input + label:hover {
   background: #f1f1f1;
   border-color: #d6d6d6;
@@ -71,7 +66,6 @@
   text-align: center;
   margin: auto;
 }
-
 .profile-pic-container .profile-pic-edit input + label i {
   position: absolute;
   top: 48%;
@@ -79,13 +73,12 @@
   transform: translate(-50%, -50%);
 }
 
+/* ------------------------------------- */
 
 .image-upload {
-  display:none;
+  display: none;
 }
-.edit-icon {
-  width: 10px;
-}
+
 .project-image {
   max-width: 30%;
 }
@@ -99,7 +92,7 @@
 }
 
 .submit-icons {
-  display:inline-block;
+  display: inline-block;
 }
 .submit-icons button {
   width: 2.5rem;
@@ -112,7 +105,6 @@
 .li-block {
   display: block;
 }
-
 
 /* FEED */
 .feed-img {
