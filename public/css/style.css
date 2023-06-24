@@ -1,7 +1,14 @@
+/* UNIVERSAL STYLES */
+
+body {
+  background: #F3F0F0;
+  box-sizing: border-box;
+}
+
+
 /* HOME PROFILE-- PROFILE PICTURE */
 
 .profile-pic-upload-container {
-  /* border: 1px solid red; */
   position: relative;
   max-width: 205px;
   /* margin: 50px auto; */
@@ -13,7 +20,6 @@
 /* Div around the profile pic edit circle
  */
 .profile-pic-edit {
-  /* border: 2px solid blue; */
   position: absolute;
   right: 12px;
   z-index: 1;
@@ -38,6 +44,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  background-size: cover;
 }
 .profile-pic-container .profile-pic-edit input + label {
   display: inline-block;
@@ -73,11 +80,7 @@
   transform: translate(-50%, -50%);
 }
 
-/* ------------------------------------- */
-
-.image-upload {
-  display: none;
-}
+/* PROJECT PAGE (SUBMISSION) */
 
 .project-image {
   max-width: 30%;
@@ -94,21 +97,47 @@
 .submit-icons {
   display: inline-block;
 }
+
 .submit-icons button {
   width: 2.5rem;
 }
 
-.none {
-  display: none;
-}
-
-.li-block {
-  display: block;
-}
 
 /* FEED */
+.feed-post-container {
+  position: relative;
+  padding: 2rem;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 2%;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+.feed-img-container {
+  max-height: 15rem;
+}
 .feed-img {
-  width: 45rem;
-  height: 45rem;
+  width: 10rem;
+  max-height: 100%;
+  border-radius: 2%;
+  border: 1px solid black;
+  position: relative;
+  overflow: hidden;
   object-fit: cover;
+}
+
+.logline {
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+  color:#080808;
+}
+
+.logline h2 {
+  font-weight: 700;
+}
+
+.logline span {
+  display: block;  
+  margin-bottom: 2rem;
+  font-weight: 400;
 }

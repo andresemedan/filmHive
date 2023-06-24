@@ -5,14 +5,19 @@
       <ul class="row list-unstyled">
         <% for(var i=0; i<projects.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
+            <div class="feed-post-container">
             <%if(projects[i].user == user.id){ %>
-            <a href="/project/myProject/<%= projects[i]._id%>">
+            <a class="logline"href="/project/myProject/<%= projects[i]._id%>">
               <%} else { %>
-                <a href="/project/<%= projects[i]._id%>">
+                <a class="logline"href="/project/<%= projects[i]._id%>">
                 <% } %>
-              <img class="img-fluid  feed-img" src="<%= projects[i].image%>">
-              <h2><%= projects[i].title %></h2>
+                <h2><%= projects[i].title %></h2>
+                <span><%= projects[i].caption %></span>
+                <div class="feed-img-container">
+                  <img class="img-fluid feed-img" src="<%= projects[i].image%>">
+                </div>
             </a>
+          </div>
           </li>
         <% } %>
         </ul>
