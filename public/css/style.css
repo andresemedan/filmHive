@@ -1,7 +1,7 @@
 /* UNIVERSAL STYLES */
 
 body {
-  background: #F3F0F0;
+  background: #fcfcfc;
   box-sizing: border-box;
 }
 
@@ -127,7 +127,7 @@ body {
 }
 
 .logline {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Courier Prime', monospace;
   text-decoration: none;
   color:#080808;
 }

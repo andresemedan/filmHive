@@ -7,7 +7,7 @@ const Profile = require("../models/Profile");
 module.exports = {  
     getFeed: async (req, res) => {
         try {
-          const projects = await Project.find().sort({ createdAt: "desc" }).lean();
+          const projects = await Project.find().sort({ createdAt: "desc" }).lean().populate('user');
           const submissions = await Submission.find({
             project: req.params.id,
           }).populate("user");

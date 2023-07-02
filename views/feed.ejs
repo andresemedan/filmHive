@@ -13,8 +13,9 @@
                 <% } %>
                 <h2><%= projects[i].title %></h2>
                 <span><%= projects[i].caption %></span>
+                <span>Created by:  <%= projects[i].user.userName %></span>
                 <div class="feed-img-container">
-                  <img class="img-fluid feed-img" src="<%= projects[i].image%>">
+                  <!-- <img class="img-fluid feed-img" src="<%= projects[i].image%>"> -->
                 </div>
             </a>
           </div>
