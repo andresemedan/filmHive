@@ -1,9 +1,20 @@
+
 /* UNIVERSAL STYLES */
 
 body {
   background: #fcfcfc;
   box-sizing: border-box;
 }
+
+/* NAV BAR */
+.nav-container {
+  display: flex;
+  border: 2px solid black;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+}
+
 
 
 /* HOME PROFILE-- PROFILE PICTURE */
