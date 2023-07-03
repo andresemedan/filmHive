@@ -3,6 +3,7 @@ const Project = require("../models/Project");
 const Submission = require("../models/Submission");
 const User = require("../models/User");
 const Profile = require("../models/Profile");
+const Comments = require("../models/Comment")
 
 module.exports = {
   getMakeProject: async (req, res) => {
@@ -47,9 +48,13 @@ module.exports = {
       const submissions = await Submission.find({
         project: req.params.id,
       }).populate("user");
+      const comments = await Comments.find({
+        project: req.params.id,
+      }).populate("user").sort({ createdAt: "desc" }).lean();
       res.render("projectPage.ejs", {
         project: project,
         user: req.user,
+        comments: comments,
         submissions: submissions,
       });
       console.log(submissions)
