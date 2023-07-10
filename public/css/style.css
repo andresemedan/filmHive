@@ -1,19 +1,32 @@
 
 /* UNIVERSAL STYLES */
+*, a {
+  color: inherit;
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.3;
+}
 
 body {
-  background: #fcfcfc;
+  background: #ffffff;
   box-sizing: border-box;
 }
 
 /* NAV BAR */
-.nav-container {
-  display: flex;
-  border: 2px solid black;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px 0;
+.navbar *{
+  font-size: 1.3rem;
+  font-weight: bold;
 }
+.navbar-brand {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.filmHive-icon {
+  color:#000000;
+  font-size: 1.5rem;
+}
+
 
 
 
@@ -124,6 +137,21 @@ body {
   border-radius: 2%;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
   overflow: hidden;
+}
+.li-flex {
+  display: flex;
+  align-content: center;
+}
+
+.card {
+  text-align: center;
+}
+.card-flex{
+  justify-self: center;
+}
+.card-img{
+  height: 100%; /* Set initial height to 100% */
+  object-fit: cover; /* Preserve aspect ratio and crop if necessary */
 }
 .feed-img-container {
   max-height: 15rem;
