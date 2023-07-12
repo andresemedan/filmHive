@@ -23,52 +23,81 @@
         </div>
       </div>
   </div>
-    <div>
+    <div class="mt-4">
         <p><strong>User Name</strong>: <%= user.userName %></p>
         <p><strong>Email</strong>: <%= user.email %></p>
-        <!-- <a href="/logout" class="col-3 btn btn-primary">Logout</a> -->
     </div>
     <div class="justify-content-center mt-5">
       <a class="btn btn-primary" href="/makeProject">Create a project</a>
     </div>  
+
+    <button class="btn btn-primary mt-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Notifications</button>
+              
+              <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                <div class="offcanvas-header">
+                  <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Notifications</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                  <% for(i=0;i<submissions.length;i++)  { %>
+                    <ul>
+                      <li>
+                        <span class="li-block">Project: <a href="/project/<%= submissions[i].status === true ? 'projectPage/' + submissions[i].project._id : submissions[i].project._id %>"><%= submissions[i].project.title %></a></span>
+                        <span class="li-block">Role: <%= submissions[i].role %></span>
+                        <span class="li-block">Submission Status: <%= submissions[i].status === null ? 'Not Selected' : submissions[i].status === true ? 'Selected' : 'Pending' %></span>
+                      </li>
+                    </ul>
+                  <% } %>
+                </div>
+              </div>
+
+<!-- MY PROJECTS -->
+
+
     <div class="row mt-5">     
         <div class="col-6">
           <h2>My Projects</h2>
           <ul class="row list-unstyled">
           <% for(var i=0; i<projects.length; i++) {%>
             <li class="col-6 justify-content-between mt-5">
-              <a href="/project/myProject/<%= projects[i]._id%>">
-                <h2><%= projects[i].title%></h2>
-                <!-- <img class="img-fluid" src="<%= projects[i].image%>"> -->
-              </a>
+              <div class="card" style="width: 18rem;">
+                <img class="img-fluid" src="<%= projects[i].image%>">
+                <div class="card-body">
+                  <a href="/project/myProject/<%= projects[i]._id%>"><h5 class="card-title"><%= projects[i].title%></h5></a>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+              </div>
+
+
+              <!-- <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title"><%= projects[i].title%></h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="/project/myProject/<%= projects[i]._id%>">
+                    <h2><%= projects[i].title%></h2>
+                    <img class="img-fluid" src="<%= projects[i].image%>">
+                  </a>
+                </div>
+              </div> -->
+
+
+
             </li>
           <% } %>
         </ul>
       </div>
-      
-          <h2>Notifications</h2>
-          <% for(i=0;i<submissions.length;i++)  { %>
-            <ul>
-              <li>
-                <span class="li-block">Project: <a href="/project/<%= submissions[i].status === true ? 'projectPage/' + submissions[i].project._id : submissions[i].project._id %>"><%= submissions[i].project.title %></a></span>
-                <span class="li-block">Role: <%= submissions[i].role %></span>
-                <span class="li-block">Submission Status: <%= submissions[i].status === null ? 'Not Selected' : submissions[i].status === true ? 'Selected' : 'Pending' %></span>
-              </li>
-            </ul>
-          <% } %>
-        </div>
+    
 
         <div class="row mt-5">
           <div class="col-6">
-            <h2>Media</h2>
-            <!-- Add your media content here -->
+
+            
+
+
+
+
           </div>
         </div>
-
-         
-        <!-- <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Projects Feed</a>
-        </div>   -->
       </div>  
     </div>
   </div>

@@ -13,8 +13,11 @@ module.exports = {
       //console.log(req.user) to see everything
       //Grabbing just the posts of the logged-in user
       const projects = await Project.find({ user: req.user.id });
+      const submissions = await Submission.find({
+        project: req.params.id,
+      }).populate("user");
       //Sending post data from mongodb and user data to ejs template
-      res.render("makeProject.ejs", { projects: projects, user: req.user });
+      res.render("makeProject.ejs", { projects: projects, user: req.user, submissions: submissions  });
     } catch (err) {
       console.log(err);
     }

@@ -11,19 +11,21 @@
 body {
   background: #ffffff;
   box-sizing: border-box;
+  color: #233a44;
 }
 
 /* NAV BAR */
+.navbar {
+  background-color: #ffffff;
+}
 .navbar *{
-  font-size: 1.3rem;
-  font-weight: bold;
+  font-size: 1.2rem;
 }
 .navbar-brand {
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 1.8rem;
+  color: #233a44;
 }
 .filmHive-icon {
-  color:#000000;
   font-size: 1.5rem;
 }
 
@@ -167,7 +169,7 @@ body {
 }
 
 .logline {
-  font-family: 'Courier Prime', monospace;
+  /* font-family: 'Courier Prime', monospace; */
   text-decoration: none;
   color:#080808;
 }
