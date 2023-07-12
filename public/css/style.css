@@ -2,6 +2,7 @@
 /* UNIVERSAL STYLES */
 *, a {
   color: inherit;
+  text-decoration: none;
 }
 .disabled {
   pointer-events: none;
@@ -14,15 +15,21 @@ body {
   color: #233a44;
 }
 
+.courier {
+  font-family: 'Courier Prime', monospace;
+}
+
 /* NAV BAR */
 .navbar {
   background-color: #ffffff;
 }
 .navbar *{
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  font-weight: 200;
 }
 .navbar-brand {
   font-size: 1.8rem;
+  font-weight: 400;
   color: #233a44;
 }
 .filmHive-icon {
@@ -55,7 +62,7 @@ body {
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  border: 1px solid black;
+  border: 1px solid #233a44;
   position: relative;
   overflow: hidden;
 }
@@ -105,6 +112,15 @@ body {
   left: 53%;
   transform: translate(-50%, -50%);
 }
+
+/* NOTIFICATIONS */
+
+
+
+.block {
+  display: block;
+}
+
 
 /* PROJECT PAGE (SUBMISSION) */
 

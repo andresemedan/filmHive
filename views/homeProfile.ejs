@@ -42,9 +42,10 @@
                   <% for(i=0;i<submissions.length;i++)  { %>
                     <ul>
                       <li>
-                        <span class="li-block">Project: <a href="/project/<%= submissions[i].status === true ? 'projectPage/' + submissions[i].project._id : submissions[i].project._id %>"><%= submissions[i].project.title %></a></span>
-                        <span class="li-block">Role: <%= submissions[i].role %></span>
-                        <span class="li-block">Submission Status: <%= submissions[i].status === null ? 'Not Selected' : submissions[i].status === true ? 'Selected' : 'Pending' %></span>
+                        <span class="block">Project: <a href="/project/<%= submissions[i].status === true ? 'projectPage/' + submissions[i].project._id : submissions[i].project._id %>"><%= submissions[i].project.title %></a></span>
+                        <span class="block">Role: <%= submissions[i].role %></span>
+                        <span>Submission Status: </span>
+                        <span class="<%= submissions[i].status === null ? 'role-rejected' : submissions[i].status === true ? 'role-accepted' : '' %>"><%= submissions[i].status === null ? 'Not Selected' : submissions[i].status === true ? 'Selected' : 'Pending' %></span>
                       </li>
                     </ul>
                   <% } %>
@@ -61,11 +62,13 @@
           <% for(var i=0; i<projects.length; i++) {%>
             <li class="col-6 justify-content-between mt-5">
               <div class="card" style="width: 18rem;">
+                <a href="/project/myProject/<%= projects[i]._id%>">
                 <img class="img-fluid" src="<%= projects[i].image%>">
                 <div class="card-body">
-                  <a href="/project/myProject/<%= projects[i]._id%>"><h5 class="card-title"><%= projects[i].title%></h5></a>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <h5 class="card-title courier"><%= projects[i].title%></h5>
+                  <p class="card-text courier">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
+                </a>
               </div>
 
 

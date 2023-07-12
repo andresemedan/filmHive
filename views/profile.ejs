@@ -22,10 +22,19 @@
         <ul class="row list-unstyled">
         <% for(var i=0; i<userProjects.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
+
+            <div class="card" style="width: 18rem;">
+              <img class="img-fluid" src="<%= projects[i].image%>">
+              <div class="card-body">
+                <a href="/project/myProject/<%= projects[i]._id%>"><h5 class="card-title courier"><%= projects[i].title%></h5></a>
+                <p class="card-text courier">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
             <a href="/project/<%= userProjects[i]._id%>">
               <h2><%= userProjects[i].title%></h2>
               <img class="img-fluid" src="<%= userProjects[i].image%>">
             </a>
+
+
           </li>
         <% } %>
       </ul>
