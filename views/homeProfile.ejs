@@ -27,81 +27,117 @@
         <p><strong>User Name</strong>: <%= user.userName %></p>
         <p><strong>Email</strong>: <%= user.email %></p>
     </div>
+
+    <!-- CREATE PROJECT -->
     <div class="justify-content-center mt-5">
       <a class="btn btn-primary" href="/makeProject">Create a project</a>
     </div>  
 
-    <button class="btn btn-primary mt-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Notifications</button>
-              
-              <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-                <div class="offcanvas-header">
-                  <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Notifications</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                  <% for(i=0;i<submissions.length;i++)  { %>
-                    <ul>
-                      <li>
-                        <span class="block">Project: <a href="/project/<%= submissions[i].status === true ? 'projectPage/' + submissions[i].project._id : submissions[i].project._id %>"><%= submissions[i].project.title %></a></span>
-                        <span class="block">Role: <%= submissions[i].role %></span>
-                        <span>Submission Status: </span>
-                        <span class="<%= submissions[i].status === null ? 'role-rejected' : submissions[i].status === true ? 'role-accepted' : '' %>"><%= submissions[i].status === null ? 'Not Selected' : submissions[i].status === true ? 'Selected' : 'Pending' %></span>
-                      </li>
-                    </ul>
-                  <% } %>
-                </div>
+    
+    
+    <!-- NOTIFICATIONS OFFCANVAS -->
+    <button class="btn btn-primary mt-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+      Notifications
+    </button>
+    
+    <div class="offcanvas offcanvas-start" data-bs-backdrop="false" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="staticBackdropLabel">Notifications</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <% for(i=0;i<submissions.length;i++)  { %>
+          <ul>
+            <li>
+              <span class="block">Project: <a class="title" href="/project/<%= submissions[i].status === true ? 'projectPage/' + submissions[i].project._id : submissions[i].project._id %>"><%= submissions[i].project.title %></a></span>
+              <span class="block">Role: <%= submissions[i].role %></span>
+              <span>Submission Status: </span>
+              <span class="<%= submissions[i].status === null ? 'role-rejected' : submissions[i].status === true ? 'role-accepted' : '' %>"><%= submissions[i].status === null ? 'Not Selected' : submissions[i].status === true ? 'Selected' : 'Pending' %></span>
+            </li>
+          </ul>
+          <% } %>
+        </div>
+      </div>
+      
+      <!-- ADD MEDIA -->
+      <button class="btn btn-primary block mt-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop2" aria-controls="staticBackdrop">
+        Add Media
+      </button>
+      
+      <div class="offcanvas offcanvas-start" data-bs-backdrop="false" tabindex="-1" id="staticBackdrop2" aria-labelledby="staticBackdropLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="staticBackdropLabel">Offcanvas</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <div>
+            <h2>Add Media</h2>
+            <form action="/profile/addProfileMedia" enctype="multipart/form-data" method="POST">
+              <div class="mb-3">
+                  <label for="title" class="form-label">Title</label>
+                  <input type="text" class="form-control" id="title" name="title">
+              </div>
+              <div class="mb-3">
+                <label for="imgUpload" class="form-label">Image</label>
+                <input type="file" class="form-control" id="imgUpload" name="imgUpload">
               </div>
 
+              <div class="mb-3">
+                <label for="fileUpload" class="form-label">File</label>
+                <input type="file" class="form-control" id="fileUpload" name="fileUpload">
+              </div>
+              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
 <!-- MY PROJECTS -->
 
 
-    <div class="row mt-5">     
-        <div class="col-6">
+        <div class="container mt-4">
+          <div class="row">
+            <div class="col">
           <h2>My Projects</h2>
-          <ul class="row list-unstyled">
+          <ul class="list-unstyled">
           <% for(var i=0; i<projects.length; i++) {%>
-            <li class="col-6 justify-content-between mt-5">
-              <div class="card" style="width: 18rem;">
+            <li class="mt-4">
+              <div class="card d-flex" style="width: 25rem;">
                 <a href="/project/myProject/<%= projects[i]._id%>">
-                <img class="img-fluid" src="<%= projects[i].image%>">
+                <!-- <img class="img-fluid" src="<%= projects[i].image%>"> -->
                 <div class="card-body">
                   <h5 class="card-title courier"><%= projects[i].title%></h5>
                   <p class="card-text courier">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 </a>
               </div>
-
-
-              <!-- <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title"><%= projects[i].title%></h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="/project/myProject/<%= projects[i]._id%>">
-                    <h2><%= projects[i].title%></h2>
-                    <img class="img-fluid" src="<%= projects[i].image%>">
-                  </a>
-                </div>
-              </div> -->
-
-
-
             </li>
           <% } %>
         </ul>
+      </div>
+      <div class="col">
+        <h2>Media</h2>
+        
+        <% for(i=0; i < media.length; i++){ %>
+
+            <div >
+              <img class="mediaImg rounded shadow-sm mt-2" src="<%= media[i].image %>" alt="Profile Picture">
+            </div>
+
+        <% } %>
+        
+
+      </div>
+      </div>
       </div>
     
 
         <div class="row mt-5">
           <div class="col-6">
 
-            
-
-
-
-
           </div>
         </div>
-      </div>  
+
     </div>
   </div>
 </div>

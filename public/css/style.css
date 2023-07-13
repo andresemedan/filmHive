@@ -13,8 +13,12 @@ body {
   background: #ffffff;
   box-sizing: border-box;
   color: #233a44;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 200;
 }
-
+.title {
+  font-weight: 700
+}
 .courier {
   font-family: 'Courier Prime', monospace;
 }
@@ -24,17 +28,18 @@ body {
   background-color: #ffffff;
 }
 .navbar *{
-  font-size: 1.3rem;
-  font-weight: 200;
+  font-size: 1.1rem;
+  font-weight: 400;
+  font-family: 'Noto Sans JP', sans-serif;
+  padding:0;
 }
 .navbar-brand {
-  font-size: 1.8rem;
+  font-family: 'Caprasimo', cursive;
+  font-size: 2rem;
   font-weight: 400;
   color: #233a44;
 }
-.filmHive-icon {
-  font-size: 1.5rem;
-}
+
 
 
 
@@ -44,7 +49,6 @@ body {
 .profile-pic-upload-container {
   position: relative;
   max-width: 205px;
-  /* margin: 50px auto; */
 }
 .profile-pic-container .profile-pic-edit input,
 .profile-pic-container button {
@@ -62,7 +66,7 @@ body {
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  border: 1px solid #233a44;
+  border: 1px solid #D5D0CA;
   position: relative;
   overflow: hidden;
 }
@@ -111,6 +115,10 @@ body {
   top: 48%;
   left: 53%;
   transform: translate(-50%, -50%);
+}
+
+.mediaImg {
+  width: 30%;
 }
 
 /* NOTIFICATIONS */
@@ -162,7 +170,7 @@ body {
 }
 
 .card {
-  text-align: center;
+  /* text-align: center; */
 }
 .card-flex{
   justify-self: center;

@@ -3,6 +3,7 @@ const Project = require("../models/Project");
 const Submission = require("../models/Submission");
 const User = require("../models/User");
 const Profile = require("../models/Profile");
+const ProfileMedia = require("../models/ProfileMedia")
 
 module.exports = {
     getProfile: async (req, res) => {
@@ -48,6 +49,8 @@ module.exports = {
         //Grabbing just the posts of the logged-in user
         const projects = await Project.find({user: req.user.id}).populate("user");
 
+        const media = await ProfileMedia.find({user: req.user.id})
+
         const profile = await Profile.find({user: req.user.id})
           .populate("user")
           .sort({ createdAt: "desc" })
@@ -57,6 +60,7 @@ module.exports = {
         //Sending post data from mongodb and user data to ejs template
         res.render("homeProfile.ejs", {
           projects: projects,
+          media: media,
           user: req.user,
           profile: profile,
           submissions: submissions,
@@ -78,6 +82,44 @@ module.exports = {
         });
         console.log("Profile picture has been added!");
         res.redirect("/profile/homeProfile");
+      } catch (err) {
+        console.log(err);
+        res.status(500).send("Something went wrong");
+      }
+    },  
+    addProfileMedia: async (req, res) => {
+      try {
+        let imgResult;
+        let fileResult;
+        console.log(req.user);
+        if (req.files["imgUpload"] && req.files["imgUpload"][0]) {
+          // Upload image to cloudinary
+          imgResult = await cloudinary.uploader.upload(
+            req.files["imgUpload"][0].path
+          );
+        }
+        if (req.files["fileUpload"] && req.files["fileUpload"][0]) {
+          //// Upload file to cloudinary
+          fileResult = await cloudinary.uploader.upload(
+            req.files["fileUpload"][0].path,
+            {
+              public_id: `${Date.now()}-${req.files.fileUpload[0].originalname}`,
+              resource_type: "raw",
+              // raw_convert: 'aspose', // Use aspose to convert files to pdf. Only 50 free per month.
+            }
+          );
+        }
+        //media is stored on cloudainary - the above request responds with url to media and the media id that you will need when deleting content
+        await ProfileMedia.create({
+          title: req.body.title,
+          file: fileResult ? fileResult.secure_url : null,
+          fileCloudinaryId: fileResult ? fileResult.public_id : null,
+          image: imgResult ? imgResult.secure_url : null,
+          cloudinaryId: imgResult ? imgResult.public_id : null,
+          user: req.user.id,
+        });
+        console.log("Post has been added!");
+        res.redirect('/profile/homeProfile');
       } catch (err) {
         console.log(err);
         res.status(500).send("Something went wrong");

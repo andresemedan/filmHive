@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
-      <h2><%= project.title %></h2>
+      <h2 class="title"><%= project.title %></h2>
       <% if(project.file) { %> 
         <a href="<%= project.file %>"> Screenplay</a>
       <% } else { %> 
@@ -57,6 +57,7 @@
       <% } %>
 
     </div>
+ 
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile/<%= project.user._id %>"><%= project.user.userName %>'s Profile</a>
     </div>

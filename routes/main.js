@@ -14,6 +14,9 @@ router.get("/profile/homeProfile", ensureAuth, profileController.getHomeProfile)
 router.get("/profile/:id", ensureAuth, profileController.getProfile);
 router.post("/profilePic", upload.single("profilePicUpload"), profileController.uploadProfilePic)
 
+//Add Media
+router.post("/profile/addProfileMedia", upload.fields([{ name: 'imgUpload', maxCount: 1 }, { name: 'fileUpload', maxCount: 1 }]), profileController.addProfileMedia);
+
 //Enable us to get project feed
 router.get("/feed", ensureAuth, feedController.getFeed);
 
