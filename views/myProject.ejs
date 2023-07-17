@@ -3,6 +3,44 @@
   <div class="row justify-content-center mt-5">
     <div class="col-6">
       <h2><%= project.title %></h2>
+
+         <!-- ADD MEDIA -->
+         <button class="btn btn-primary block mt-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop2" aria-controls="staticBackdrop">
+          Add Media
+        </button>
+        
+        <div class="offcanvas offcanvas-start" data-bs-backdrop="false" tabindex="-1" id="staticBackdrop2" aria-labelledby="staticBackdropLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="staticBackdropLabel">Add Media</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <div>
+              <h2>Add Media</h2>
+              <form action="/project/addProjectMedia" enctype="multipart/form-data" method="POST">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="mb-3">
+                  <label for="imgUpload" class="form-label">Image</label>
+                  <input type="file" class="form-control" id="imgUpload" name="imgUpload">
+                </div>
+  
+                <div class="mb-3">
+                  <label for="fileUpload" class="form-label">File</label>
+                  <input type="file" class="form-control" id="fileUpload" name="fileUpload">
+                </div>
+                <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+              </form>
+  
+            </div>
+          </div>
+        </div>
+
+
+
+
       <% if(project.file) { %> 
         <a href="<%= project.file%>"> Screenplay</a>
       <% } else { %> 
@@ -13,13 +51,13 @@
         <ul>
           <% for(var i=0; i<submission.length; i++) {%>
               <% if (submission && submission[i].project == project.id) { %>
-              <li class="col-6 justify-content-between mt-5 
+              <li class="justify-content-between mt-5 
               <%= submission[i].status === null ? 'role-rejected' : submission[i].status === true ? 'role-accepted' : '' %>">
                 <a href="/profile/<%= submission[i].user._id %>"> <%= submission[i].user.userName %> </a>would like to be <%= submission[i].role %>
                 <form
                 action="/project/acceptRole/<%=submission[i]._id%>?_method=PUT"
                 method="POST"
-                class="col-3 submit-icons"
+                class="submit-icons"
                 >
                 <button class="btn btn-primary" type="submit">
                   <i class="fa fa-check"></i>
@@ -29,7 +67,7 @@
                 <form
                 action="/project/rejectRole/<%=submission[i]._id%>?_method=PUT"
                 method="POST"
-                class="col-3 submit-icons"
+                class="submit-icons"
                 >
                 <button class="btn btn-primary" type="submit">
                   <i class="fa fa-times" aria-hidden="true"></i>
@@ -43,17 +81,8 @@
       </div>
       
       <div class="row justify-content-between">
-       
-        <!-- <form
-          class="col-1"
-          action="/project/likeProject/<%=project.id %>?_method=PUT"
-          method="POST"
-        >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
-        </form>
-        <h3 class="col-3">Likes: <%= project.likes %></h3>
-        <%if(project.user == user.id){ %> -->
-          
+
+        <%if(project.user == user.id){ %>
         <form
           action="/project/deleteProject/<%= project.id %>?_method=DELETE"
           method="POST"
@@ -83,6 +112,32 @@
                 <button type="submit">Submit</button>
               </form>
             </div> -->
+
+
+            <div class="col-6">
+              <h2>Media</h2>
+              <% if(projectMedia) { %>
+              <% for (let i = 0; i < projectMedia.length; i++) { %>
+                <!-- Button trigger modal -->
+                <a data-bs-toggle="modal" data-bs-target="#exampleModal<%= i %>">
+                  <div>
+                    <img class="mediaImg rounded shadow-sm mt-2" src="<%= projectMedia[i].image %>" alt="Profile Picture">
+                  </div>
+                </a>
+              
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal<%= i %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <img class="mediaImg rounded shadow-sm mt-2" src="<%= projectMedia[i].image %>" alt="Profile Picture">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+              <% } %>
+            </div>
 
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile/homeProfile">Return to Profile</a>

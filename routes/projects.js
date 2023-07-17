@@ -18,15 +18,16 @@ router.get("/projectPage/:id", ensureAuth, projectsController.getProjectPage);
 //Enables user to create post w/ cloudinary for media uploads
 router.post("/createProject", upload.fields([{ name: 'imgUpload', maxCount: 1 }, { name: 'fileUpload', maxCount: 1 }]), projectsController.createProject);
 
+//Add Project Media
+router.post("/addProjectMedia", upload.fields([{ name: 'imgUpload', maxCount: 1 }, { name: 'fileUpload', maxCount: 1 }]), projectsController.addProjectMedia);
+
 // router.post("/createProject", upload.single('file'), projectsController.createProject);
 //Enables user to submit selected role for a project.
 router.post("/submitToProject/:id", submissionsController.submitToProject);
 
 //Enables user to like post. In controller, uses POST model to update likes by 1
 router.put("/likeProject/:id", projectsController.likeProject);
-
 router.put("/acceptRole/:id", submissionsController.acceptRole);
-
 router.put("/rejectRole/:id", submissionsController.rejectRole);
 
 //Enables user to delete post. In controller, uses POST model to delete post from MongoDB collection

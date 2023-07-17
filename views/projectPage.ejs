@@ -64,6 +64,31 @@
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile/<%= project.user._id %>"><%= project.user.userName %>'s Profile</a>
     </div>
+
+    <div class="col-6">
+      <h2>Media</h2>
+      <% if(projectMedia) { %>
+      <% for (let i = 0; i < projectMedia.length; i++) { %>
+        <!-- Button trigger modal -->
+        <a data-bs-toggle="modal" data-bs-target="#exampleModal<%= i %>">
+          <div>
+            <img class="mediaImg rounded shadow-sm mt-2" src="<%= projectMedia[i].image %>" alt="Profile Picture">
+          </div>
+        </a>
+      
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal<%= i %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <img class="mediaImg rounded shadow-sm mt-2" src="<%= projectMedia[i].image %>" alt="Profile Picture">
+              </div>
+            </div>
+          </div>
+        </div>
+      <% } %>
+      <% } %>
+    </div>
   </div>
 </div>
 

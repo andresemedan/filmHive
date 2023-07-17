@@ -26,6 +26,8 @@ module.exports = {
         const submissions = await Submission.find({
             user: req.params.id,
           }).populate("user").populate("project").sort({ createdAt: "desc" }).lean();
+
+          const media = await ProfileMedia.find({user: req.params.id}).populate('user')
   
         //Sending post data from mongodb and user data to ejs template
         res.render("profile.ejs", {
@@ -36,6 +38,7 @@ module.exports = {
           userProjects: userProjects,
           profile: profile,
           submissions: submissions,
+          media: media,
         });
       } catch (err) {
         console.log(err);

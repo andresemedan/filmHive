@@ -49,7 +49,9 @@
         <% for(i=0;i<submissions.length;i++)  { %>
           <ul>
             <li>
-              <span class="block">Project: <a class="title" href="/project/<%= submissions[i].status === true ? 'projectPage/' + submissions[i].project._id : submissions[i].project._id %>"><%= submissions[i].project.title %></a></span>
+              <% if (submissions[i].project) { %>
+                <span class="block">Project: <a class="title" href="/project/<%= submissions[i].status === true ? 'projectPage/' + submissions[i].project._id : submissions[i].project._id %>"><%= submissions[i].project.title %></a></span>
+              <% } %>
               <span class="block">Role: <%= submissions[i].role %></span>
               <span>Submission Status: </span>
               <span class="<%= submissions[i].status === null ? 'role-rejected' : submissions[i].status === true ? 'role-accepted' : '' %>"><%= submissions[i].status === null ? 'Not Selected' : submissions[i].status === true ? 'Selected' : 'Pending' %></span>
@@ -107,23 +109,52 @@
                 <!-- <img class="img-fluid" src="<%= projects[i].image%>"> -->
                 <div class="card-body">
                   <h5 class="card-title courier"><%= projects[i].title%></h5>
-                  <p class="card-text courier">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text courier"><%= projects[i].caption%></p>
+                  <p>Creator</p>
                 </div>
                 </a>
               </div>
             </li>
           <% } %>
+          <% for(i=0;i<submissions.length;i++)  { %>
+              <li class="mt-4">
+                <% if (submissions[i].project && submissions[i].status === true ) { %>
+                  <div class="card d-flex" style="width: 25rem;">
+                    <a class="title" href="/project/projectPage/<%= submissions[i].project._id%>">
+                  <div class="card-body">
+                    <h5 class="card-title courier"><%= submissions[i].project.title %></h5>
+                    <p class="submission-project-p card-text courier"><%= submissions[i].project.caption %></p>
+                    <p class="submission-project-p"><%= submissions[i].role %></p>
+                </div>
+              </div>
+            </a>
+          </li>
+          <% } %>                
+            <% } %>
         </ul>
       </div>
-      <div class="col">
+
+      <div class="col-6">
         <h2>Media</h2>
         
-        <% for(i=0; i < media.length; i++){ %>
-
-            <div >
+        <% for (let i = 0; i < media.length; i++) { %>
+          <!-- Button trigger modal -->
+          <a data-bs-toggle="modal" data-bs-target="#exampleModal<%= i %>">
+            <div>
               <img class="mediaImg rounded shadow-sm mt-2" src="<%= media[i].image %>" alt="Profile Picture">
             </div>
-
+          </a>
+        
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal<%= i %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <img class="mediaImg rounded shadow-sm mt-2" src="<%= media[i].image %>" alt="Profile Picture">
+                </div>
+              </div>
+            </div>
+          </div>
         <% } %>
         
 

@@ -124,12 +124,19 @@ body {
   width: 30%;
 }
 
+.modal-body .mediaImg {
+  width: 100%;
+}
 /* NOTIFICATIONS */
 
 .block {
   display: block;
 }
 
+/* added this because a bold font weight was added and I didn't know from where... */
+.submission-project-p {
+  font-weight: normal;
+}
 
 /* PROJECT PAGE (SUBMISSION) */
 
@@ -154,25 +161,36 @@ body {
 }
 
 
-/* FEED */
-.feed-post-container {
-  position: relative;
-  padding: 2rem;
-  text-align: center;
-  background: #ffffff;
-  border: 1px solid black;
-  border-radius: 2%;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
-  overflow: hidden;
-}
+/* -----------------------FEED------------------------------------- */
 .li-flex {
   display: flex;
   align-content: center;
 }
 
+/* FEED CARD */
+
 .card {
-  /* text-align: center; */
+  background-color: #ffff;
+  transition: background-color .5s, border-color .5s, color .5s;
 }
+
+.card:hover{
+  background: #F5F7FE;
+  border-color:#677AF6;
+  color: #677AF6;
+}
+
+.card-title-section {
+  border-radius: .375rem .375rem 0 0;
+  border-bottom: 1px solid #D5D0CA;
+  padding: 1rem 1rem .5rem 1rem;
+  text-align: center;
+}
+
+.card-text-section {
+  padding: 2rem;
+}
+
 .card-flex{
   justify-self: center;
 }
@@ -227,4 +245,12 @@ body {
 .signup-title {
   text-align: center;
   margin-top: 10%;
+}
+
+/*  FOOTER  */
+.footer {
+  text-align: center;
+  color: #c7c3bd;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
 }
