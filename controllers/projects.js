@@ -49,7 +49,7 @@ module.exports = {
       //http://localhost:2121/post/631a7f59a3e56acfc7da286f
       //id === 631a7f59a3e56acfc7da286f
       const project = await Project.findById(req.params.id).populate("user");
-      const projectMedia = await ProjectMedia.find({user: req.user.id}).populate("user")
+      const projectMedia = await ProjectMedia.find({user: req.user.id}).populate("user").populate("project");
       const submissions = await Submission.find({
         project: req.params.id,
       }).populate("user");
@@ -135,7 +135,7 @@ module.exports = {
     try {
       let imgResult;
       let fileResult;
-      console.log(req.user);
+      console.log(req.params.id);
       if (req.files["imgUpload"] && req.files["imgUpload"][0]) {
         // Upload image to cloudinary
         imgResult = await cloudinary.uploader.upload(
@@ -160,6 +160,7 @@ module.exports = {
         fileCloudinaryId: fileResult ? fileResult.public_id : null,
         image: imgResult ? imgResult.secure_url : null,
         cloudinaryId: imgResult ? imgResult.public_id : null,
+        project: req.params.id,
         user: req.user.id,
       });
       console.log("Post has been added!");

@@ -4,7 +4,7 @@
     <div class="col">
       <h2><%= project.title %> Project Page</h2>
       <% if(project.file) { %> 
-        <a href="<%= project.file %>"> Screenplay</a>
+        <a type="button" class="btn btn-script btn-outline-success mt-2" href="<%= project.file %>"><%= project.title %></a>
       <% } else { %> 
         <a style="display:none;"></a>
         <% } %>
@@ -67,12 +67,16 @@
 
     <div class="col-6">
       <h2>Media</h2>
-      <% if(projectMedia) { %>
       <% for (let i = 0; i < projectMedia.length; i++) { %>
+        <% if(projectMedia[i].project._id.toString() == project._id.toString()) { %>  
         <!-- Button trigger modal -->
         <a data-bs-toggle="modal" data-bs-target="#exampleModal<%= i %>">
           <div>
-            <img class="mediaImg rounded shadow-sm mt-2" src="<%= projectMedia[i].image %>" alt="Profile Picture">
+            <% if(projectMedia[i].file) { %>
+              <a type="button" class="btn btn-script btn-outline-success mt-2" href="<%= projectMedia[i].file %>"><%= projectMedia[i].title %></a>
+              <% } else { %>
+                <img class="mediaImg rounded shadow-sm mt-2" src="<%= projectMedia[i].image %>" alt="Profile Picture">
+                <% } %>
           </div>
         </a>
       
@@ -92,4 +96,4 @@
   </div>
 </div>
 
-<%- include('partials/footer') -%>
+<%- include('partials/footer', { class: 'footer' }) -%>

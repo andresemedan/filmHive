@@ -1,56 +1,68 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row justify-content-center mt-5">
+<div class="container myContainer">
+      <div class="col text-center">
+        <h1>Film Title: <%= project.title %></h1> 
+        <h2>Description: <%= project.caption %></h2>
+      </div>
+    <div class="row">
     <div class="col-6">
-      <h2><%= project.title %></h2>
+      <% if(project.file) { %> 
+        <a type="button" class="btn btn-script btn-outline-success mt-2" href="<%= project.file %>"><%= project.title %></a>
+        <% } else { %> 
+          <a style="display:none;"></a>
+          <%}%>
 
-         <!-- ADD MEDIA -->
-         <button class="btn btn-primary block mt-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop2" aria-controls="staticBackdrop">
-          Add Media
+          <!-- ADD MEDIA -->
+          <button class="btn btn-primary block mt-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop2" aria-controls="staticBackdrop">
+           Add Media
+         </button>
+         
+         
+         <div class="offcanvas offcanvas-start" data-bs-backdrop="false" tabindex="-1" id="staticBackdrop2" aria-labelledby="staticBackdropLabel">
+           <div class="offcanvas-header">
+             <h5 class="offcanvas-title" id="staticBackdropLabel">Add Media</h5>
+             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+           </div>
+           <div class="offcanvas-body">
+             <div>
+               <h2>Add Media</h2>
+               <form action="/project/addProjectMedia/<%= project._id %>" enctype="multipart/form-data" method="POST">
+                 <div class="mb-3">
+                     <label for="title" class="form-label">Title</label>
+                     <input type="text" class="form-control" id="title" name="title">
+                 </div>
+                 <div class="mb-3">
+                   <label for="imgUpload" class="form-label">Image</label>
+                   <input type="file" class="form-control" id="imgUpload" name="imgUpload">
+                 </div>
+    
+                 <div class="mb-3">
+                   <label for="fileUpload" class="form-label">File</label>
+                   <input type="file" class="form-control" id="fileUpload" name="fileUpload">
+                 </div>
+                 <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+               </form>
+    
+             </div>
+           </div>
+         </div>
+
+         <!-- OFF CANVAS SUBMISSIONS -->
+         <button class="btn btn-primary mt-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+          Submissions
         </button>
         
-        <div class="offcanvas offcanvas-start" data-bs-backdrop="false" tabindex="-1" id="staticBackdrop2" aria-labelledby="staticBackdropLabel">
+        
+        <div class="offcanvas offcanvas-start" data-bs-backdrop="false" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="staticBackdropLabel">Add Media</h5>
+            <h5 class="offcanvas-title" id="staticBackdropLabel">Submissions</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
-            <div>
-              <h2>Add Media</h2>
-              <form action="/project/addProjectMedia" enctype="multipart/form-data" method="POST">
-                <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" name="title">
-                </div>
-                <div class="mb-3">
-                  <label for="imgUpload" class="form-label">Image</label>
-                  <input type="file" class="form-control" id="imgUpload" name="imgUpload">
-                </div>
-  
-                <div class="mb-3">
-                  <label for="fileUpload" class="form-label">File</label>
-                  <input type="file" class="form-control" id="fileUpload" name="fileUpload">
-                </div>
-                <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-              </form>
-  
-            </div>
-          </div>
-        </div>
-
-
-
-
-      <% if(project.file) { %> 
-        <a href="<%= project.file%>"> Screenplay</a>
-      <% } else { %> 
-        <a style="display:none;"></a>
-        <%}%>
-        <img class="img-fluid" src="<%= project.image%>" />   
-      <div class="container">
-        <ul>
-          <% for(var i=0; i<submission.length; i++) {%>
-              <% if (submission && submission[i].project == project.id) { %>
+            <% for(var i=0; i<submission.length; i++) {%>
+              <div class="row">
+                <% if (submission && submission[i].project == project.id) { %>
+              <ul>
               <li class="justify-content-between mt-5 
               <%= submission[i].status === null ? 'role-rejected' : submission[i].status === true ? 'role-accepted' : '' %>">
                 <a href="/profile/<%= submission[i].user._id %>"> <%= submission[i].user.userName %> </a>would like to be <%= submission[i].role %>
@@ -75,74 +87,69 @@
                 </form>
               </li>
               <% } %>
+            </ul>
             <% } %>
-          </ul>
-
+           </div>
+          </div>
+        </div>  
+        
       </div>
+
+      <!-- return to profile button  -->
+      <div class="col mt-2">
+        <a class="btn btn-primary" href="/profile/homeProfile">Return to Profile</a>
+      </div>
+      </div> 
       
-      <div class="row justify-content-between">
 
-        <%if(project.user == user.id){ %>
-        <form
-          action="/project/deleteProject/<%= project.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
-      </div>
-    </div>
-    <div class="col-3 mt-5">
-      <p><%= project.caption %></p>
-    </div>
-                <!-- This will be in the Projects Submission Page not the create project page -->
+      <div class="col-6">
+        <h2>Media</h2>
+  
 
-
-            <!-- <div>
-              <form method="POST" action="/project/submitToProject/<%= project._id %>">
-                <p>Want to join this team?</p>
-                <label for="selectedRole">Select Role: </label>
-                <select id="selectedRole" name="selectedRole">
-                  <option value="director">director</option>
-                  <option value="actor">actor</option>
-                  <option value="writer">writer</option>
-                  <option value="cinematographer">cinematographer</option>
-                </select>
-                <button type="submit">Submit</button>
-              </form>
-            </div> -->
-
-
-            <div class="col-6">
-              <h2>Media</h2>
-              <% if(projectMedia) { %>
-              <% for (let i = 0; i < projectMedia.length; i++) { %>
-                <!-- Button trigger modal -->
-                <a data-bs-toggle="modal" data-bs-target="#exampleModal<%= i %>">
-                  <div>
-                    <img class="mediaImg rounded shadow-sm mt-2" src="<%= projectMedia[i].image %>" alt="Profile Picture">
-                  </div>
-                </a>
-              
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal<%= i %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-body">
-                        <img class="mediaImg rounded shadow-sm mt-2" src="<%= projectMedia[i].image %>" alt="Profile Picture">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <% } %>
-              <% } %>
+        <% for (let i = 0; i < projectMedia.length; i++) { %>
+          <% if(projectMedia[i].project._id.toString() == project._id.toString()) { %>  
+          <!-- Button trigger modal -->
+          <a data-bs-toggle="modal" data-bs-target="#exampleModal<%= i %>">
+            <div>
+              <% if(projectMedia[i].file) { %>
+                <a type="button" class="btn btn-script btn-outline-success mt-2" href="<%= projectMedia[i].file %>"><%= projectMedia[i].title %></a>
+                <% } else { %>
+                  <img class="mediaImg rounded shadow-sm mt-2" src="<%= projectMedia[i].image %>" alt="Profile Picture">
+                  <% } %>
             </div>
+          </a>
+        
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal<%= i %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <img class="mediaImg rounded shadow-sm mt-2" src="<%= projectMedia[i].image %>" alt="Profile Picture">
+                </div>
+              </div>
+            </div>
+          </div>
+        <% } %>
+        <% } %>
+      </div>  
+       
+      <%if(project.user == user.id){ %>
+      <form
+        action="/project/deleteProject/<%= project.id %>?_method=DELETE"
+        method="POST"
+        class="col d-flex justify-content-end"
+      >
+      <div class="d-grid gap-2 col-2">
+      <button type="submit" class="btn btn-delete btn-danger fa fa-trash mt-5"></button>
+        <!-- <button class="btn btn-primary fa fa-trash" type="submit"></button> -->
+      </div>
+      </form>
+      <%}%>
 
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile/homeProfile">Return to Profile</a>
+    </div>
     </div>
   </div>
+  
 </div>
 
-<%- include('partials/footer') -%>
+<%- include('partials/footer', { class: 'footer' }) -%>

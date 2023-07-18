@@ -1,7 +1,7 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row mt-5">
-      <div class="col-lg-8 profile-pic-container">
+      <div class="col profile-pic-container">
         <div class="profile-pic-upload-container">
         <% for(i=0; i < profile.length; i++){ %>
           <% if(profile[i].user._id.toString() === user._id.toString()) {%>
@@ -20,6 +20,9 @@
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
            </form>
           </div>
+        </div>
+        <div class="bio col">
+          <span> bio </span>
         </div>
       </div>
   </div>
@@ -119,12 +122,12 @@
           <% for(i=0;i<submissions.length;i++)  { %>
               <li class="mt-4">
                 <% if (submissions[i].project && submissions[i].status === true ) { %>
-                  <div class="card d-flex" style="width: 25rem;">
+                  <div class="card d-flex" style="width: 20rem;">
                     <a class="title" href="/project/projectPage/<%= submissions[i].project._id%>">
                   <div class="card-body">
                     <h5 class="card-title courier"><%= submissions[i].project.title %></h5>
-                    <p class="submission-project-p card-text courier"><%= submissions[i].project.caption %></p>
-                    <p class="submission-project-p"><%= submissions[i].role %></p>
+                    <!-- <p class="submission-project-p card-text courier"><%= submissions[i].project.caption %></p> -->
+                    <p class="submission-project-p">Role: <%= submissions[i].role %></p>
                 </div>
               </div>
             </a>
@@ -149,6 +152,9 @@
           <div class="modal fade" id="exampleModal<%= i %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title"><%= media[i].title %></h5>
+                </div>
                 <div class="modal-body">
                   <img class="mediaImg rounded shadow-sm mt-2" src="<%= media[i].image %>" alt="Profile Picture">
                 </div>
@@ -173,4 +179,4 @@
   </div>
 </div>
 <script src="/js/homeProfile.js"></script>
-<%- include('partials/footer') -%>
+<%- include('partials/footer', { class: 'footer' }) -%>

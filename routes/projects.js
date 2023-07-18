@@ -19,7 +19,7 @@ router.get("/projectPage/:id", ensureAuth, projectsController.getProjectPage);
 router.post("/createProject", upload.fields([{ name: 'imgUpload', maxCount: 1 }, { name: 'fileUpload', maxCount: 1 }]), projectsController.createProject);
 
 //Add Project Media
-router.post("/addProjectMedia", upload.fields([{ name: 'imgUpload', maxCount: 1 }, { name: 'fileUpload', maxCount: 1 }]), projectsController.addProjectMedia);
+router.post("/addProjectMedia/:id", upload.fields([{ name: 'imgUpload', maxCount: 1 }, { name: 'fileUpload', maxCount: 1 }]), projectsController.addProjectMedia);
 
 // router.post("/createProject", upload.single('file'), projectsController.createProject);
 //Enables user to submit selected role for a project.

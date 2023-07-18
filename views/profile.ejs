@@ -23,11 +23,11 @@
         <ul class="list-unstyled">
           <% for(var i=0; i<userProjects.length; i++) {%>
           <li class="mt-4">
-            <div class="card d-flex" style="width: 25rem;">
+            <div class="card d-flex" style="width: 20rem;">
               <a href="/project/<%= userProjects[i]._id%>">
               <div class="card-body">
                 <h5 class="card-title courier"><%= userProjects[i].title%></h5>
-                <p class="card-text courier">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text courier"><%= userProjects[i].caption%></p>
               </div>
               </a>
             </div>
@@ -68,4 +68,4 @@
     </div>
   </div>
 </div>
-<%- include('partials/footer') -%>
+<%- include('partials/footer', { class: 'footer' }) -%>

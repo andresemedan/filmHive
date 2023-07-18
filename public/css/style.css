@@ -1,8 +1,48 @@
 
-/* UNIVERSAL STYLES */
+/* --------------------------UNIVERSAL STYLES -----------------------------------*/
+body {
+  display: flex;
+  min-height: 100vh; /* Minimum height of viewport */
+  flex-direction: column; /* Stack elements vertically */
+  margin: 0;
+}
+
 * a, a:hover {
   color: inherit;
   text-decoration: none;
+}
+
+
+/* Buttons */
+.btn {
+  background-color: #677AF6;
+  border-color: #677AF6;
+  transition: background-color .5s, border-color .5s;
+}
+.btn:hover {
+  background-color: #495dde;
+  border-color: #495dde;
+}
+/* screenplay button */
+.btn-outline-success {
+  color: none;
+}
+.btn-script {
+  background:inherit;
+  color: #677AF6;
+}
+.btn-delete {
+  border-color: red;
+  background: inherit;
+  transition: background-color .5s, border-color .5s;
+}
+.btn-delete:hover {
+  background-color: rgb(189, 2, 2);
+  border-color: rgb(189, 2, 2);
+}
+
+.fa-trash {
+  background-color: red;
 }
 
 .disabled {
@@ -24,7 +64,7 @@ body {
   font-family: 'Courier Prime', monospace;
 }
 
-/* NAV BAR */
+/* -------------------------------------- NAV BAR ---------------------------------------------- */
 .navbar {
   background-color: #ffffff;
 }
@@ -47,8 +87,9 @@ body {
 
 
 
-/* HOME PROFILE-- PROFILE PICTURE */
+/* -------------------------------------- HOME PROFILE------------------------  */
 
+/* PROFILE PICTURE */
 .profile-pic-upload-container {
   position: relative;
   max-width: 205px;
@@ -57,8 +98,8 @@ body {
 .profile-pic-container button {
   display: none;
 }
-/* Div around the profile pic edit circle
- */
+/* Div around the profile pic edit circle */
+
 .profile-pic-edit {
   position: absolute;
   right: 12px;
@@ -119,6 +160,7 @@ body {
   left: 53%;
   transform: translate(-50%, -50%);
 }
+/* Modal styling-- homeProfile */
 
 .mediaImg {
   width: 30%;
@@ -127,7 +169,7 @@ body {
 .modal-body .mediaImg {
   width: 100%;
 }
-/* NOTIFICATIONS */
+/* Notifications */
 
 .block {
   display: block;
@@ -138,7 +180,18 @@ body {
   font-weight: normal;
 }
 
-/* PROJECT PAGE (SUBMISSION) */
+/* HomeProfile Media */
+
+.content-width-div {
+  display: inline-block;
+}
+
+/* ------------------------------- PROJECT PAGE (MYPROJECT) ----------------------------------- */
+
+
+
+
+/* ------------------------------- PROJECT PAGE (SUBMISSION) ----------------------------------*/
 
 .project-image {
   max-width: 30%;
@@ -161,7 +214,7 @@ body {
 }
 
 
-/* -----------------------FEED------------------------------------- */
+/* ---------------------------------------- FEED ---------------------------------------------- */
 .li-flex {
   display: flex;
   align-content: center;
@@ -190,6 +243,10 @@ body {
 .card-text-section {
   padding: 2rem;
 }
+.card-title {
+  font-weight: bold;
+}
+
 
 .card-flex{
   justify-self: center;
@@ -227,20 +284,20 @@ body {
   font-weight: 400;
 }
 
-/* HERO PAGE */
+/* -------------------------------------- HERO PAGE ----------------------------------------- */
 
 .btn-signup {
   background: #ffffff;
 }
 
-/* LOG IN PAGE */
+/* ---------------------------------------- LOG IN PAGE ------------------------------------------ */
 
 .login-title {
   text-align: center;
   margin-top: 25%;
 }
 
-/* SIGN UP PAGE */
+/* ----------------------------------------- SIGN UP PAGE -------------------------------------------- */
 
 .signup-title {
   text-align: center;
@@ -253,4 +310,8 @@ body {
   color: #c7c3bd;
   font-size: 1.1rem;
   margin-bottom: 2rem;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
