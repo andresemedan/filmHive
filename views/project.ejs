@@ -32,8 +32,8 @@
     <div class="col-3 mt-5">
       <p><%= project.caption %></p>
     </div>
-    <div>
 
+    <div>
     <% let userHasSubmitted = false %>
     <% for(i = 0; i<submissions.length; i++){ %>
       <%if(user._id.toString() === submissions[i].user._id.toString()) { %>
@@ -55,7 +55,6 @@
         <button type="submit">Submit</button>
       </form>
       <% } %>
-
     </div>
  
     <div class="col-6 mt-5">

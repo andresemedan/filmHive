@@ -163,7 +163,9 @@ body {
 /* Modal styling-- homeProfile */
 
 .mediaImg {
-  width: 30%;
+  width: 50%;
+  height:100%;
+  object-fit: cover;
 }
 
 .modal-body .mediaImg {

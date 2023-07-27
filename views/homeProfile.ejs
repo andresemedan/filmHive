@@ -1,31 +1,47 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row mt-5">
-      <div class="col profile-pic-container">
-        <div class="profile-pic-upload-container">
-        <% for(i=0; i < profile.length; i++){ %>
-          <% if(profile[i].user._id.toString() === user._id.toString()) {%>
+    <div class="col-md-6 profile-pic-container">
+      <div class="profile-pic-upload-container">
+        <% let userHasProfilePic = false %>
+        <% for (i = 0; i < profile.length; i++) { %>
+          <% if (profile[i].user._id.toString() === user._id.toString()) { %>
             <div class="profile-pic-preview">
               <img class="profile-pic" src="<%= profile[i].profilePic %>" alt="Profile Picture">
             </div>
-              <% break %>
-            <% } else { %>
-               null
-            <% } %>
+            <% userHasProfilePic = true %>
+            <% break %>
+          <% } %>
         <% } %>
+  
+        <% if (!userHasProfilePic) { %>
+          <!-- Display a placeholder or default image if user does not have a profile picture -->
+          <div class="profile-pic-preview">
+            <img class="profile-pic" src="path_to_default_image.jpg" alt="Default Profile Picture">
+          </div>
+        <% } %>
+  
         <div class="profile-pic-edit">
           <form id="profilePicForm" action="/profilePic" enctype="multipart/form-data" method="POST">
-              <input type="file" class="form-control profile-pic-input" id="profilePicUpload" name="profilePicUpload">
-              <label for="profilePicUpload" class="form-label"><i class="fas fa-edit"></i></label>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-           </form>
-          </div>
-        </div>
-        <div class="bio col">
-          <span> bio </span>
+            <input type="file" class="form-control profile-pic-input" id="profilePicUpload" name="profilePicUpload">
+            <label for="profilePicUpload" class="form-label"><i class="fas fa-edit"></i></label>
+            <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+          </form>
         </div>
       </div>
+    </div>
+    <!-- BIO -->
+    <div class="col-md-6 bio">
+      <% if (user.bio) { %>
+        <!-- Display user's bio if it exists -->
+        <span><%= user.bio %></span>
+      <% } else { %>
+        <!-- Display a message if the user's bio is empty -->
+        <span>No bio available.</span>
+      <% } %>
+    </div>
   </div>
+ 
     <div class="mt-4">
         <p><strong>User Name</strong>: <%= user.userName %></p>
         <p><strong>Email</strong>: <%= user.email %></p>
@@ -97,9 +113,10 @@
           </div>
         </div>
       </div>
+    </div>
+
+
 <!-- MY PROJECTS -->
-
-
         <div class="container mt-4">
           <div class="row">
             <div class="col">
@@ -137,34 +154,36 @@
         </ul>
       </div>
 
-      <div class="col-6">
-        <h2>Media</h2>
-        
-        <% for (let i = 0; i < media.length; i++) { %>
-          <!-- Button trigger modal -->
-          <a data-bs-toggle="modal" data-bs-target="#exampleModal<%= i %>">
-            <div>
-              <img class="mediaImg rounded shadow-sm mt-2" src="<%= media[i].image %>" alt="Profile Picture">
+      <div class="col-md-6">
+        <h2>My Media</h2>
+      
+        <div class="row g-3">
+          <% for (let i = 0; i < media.length; i++) { %>
+            <div class="col-6">
+              <!-- Button trigger modal -->
+              <a data-bs-toggle="modal" data-bs-target="#exampleModal<%= i %>">
+                <img class="mediaImg rounded shadow-sm mt-2" src="<%= media[i].image %>" alt="Profile Picture">
+              </a>
             </div>
-          </a>
-        
-          <!-- Modal -->
-          <div class="modal fade" id="exampleModal<%= i %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title"><%= media[i].title %></h5>
-                </div>
-                <div class="modal-body">
-                  <img class="mediaImg rounded shadow-sm mt-2" src="<%= media[i].image %>" alt="Profile Picture">
+      
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal<%= i %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title"><%= media[i].title %></h5>
+                  </div>
+                  <div class="modal-body">
+                    <img class="mediaImg rounded shadow-sm mt-2" src="<%= media[i].image %>" alt="Profile Picture">
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        <% } %>
-        
-
+          <% } %>
+        </div>
       </div>
+      
+
       </div>
       </div>
     

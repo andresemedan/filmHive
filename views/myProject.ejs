@@ -60,7 +60,7 @@
           </div>
           <div class="offcanvas-body">
             <% for(var i=0; i<submission.length; i++) {%>
-              <div class="row">
+
                 <% if (submission && submission[i].project == project.id) { %>
               <ul>
               <li class="justify-content-between mt-5 
@@ -90,22 +90,21 @@
             </ul>
             <% } %>
            </div>
-          </div>
+
         </div>  
         
       </div>
+    </div> 
 
       <!-- return to profile button  -->
       <div class="col mt-2">
         <a class="btn btn-primary" href="/profile/homeProfile">Return to Profile</a>
       </div>
-      </div> 
       
-
+      
+      <div class="row d-flex justify-content-end">
       <div class="col-6">
         <h2>Media</h2>
-  
-
         <% for (let i = 0; i < projectMedia.length; i++) { %>
           <% if(projectMedia[i].project._id.toString() == project._id.toString()) { %>  
           <!-- Button trigger modal -->
@@ -132,6 +131,7 @@
         <% } %>
         <% } %>
       </div>  
+    </div>
        
       <%if(project.user == user.id){ %>
       <form
