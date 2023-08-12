@@ -17,10 +17,13 @@ router.post("/profilePic", upload.single("profilePicUpload"), profileController.
 //Add Media
 router.post("/profile/addProfileMedia", upload.fields([{ name: 'imgUpload', maxCount: 1 }, { name: 'fileUpload', maxCount: 1 }]), profileController.addProfileMedia);
 
-// // Add Bio
-router.post("/createBio", (req, res) => {
-    console.log("recieved form subsmission", req.body)
-    profileController.createBio});
+//Add Bio
+// router.post("/createBio", (req, res) => {
+//     console.log("recieved form subsmission", req.body)
+//     profileController.createBio(req,res)});
+// If I want to keep the console.log, I have to invoice the createBio() method.
+// Othersiwise just keep it as 
+router.post("/createBio", profileController.createBio);
 
 //Enable us to get project feed
 router.get("/feed", ensureAuth, feedController.getFeed);

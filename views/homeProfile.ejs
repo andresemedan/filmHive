@@ -1,7 +1,7 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-4 profile-pic-container">
+    <div class="col-md-4 profile-pic-container mb-3">
       <div class="profile-pic-upload-container">
         <% let userHasProfilePic = false %>
         <% for (i = 0; i < profile.length; i++) { %>
@@ -34,9 +34,11 @@
 <!-- BIO -->
 <div class="col-md-8 bio-pic-container">
   <div class="bio-pic-upload-container">
-    <div class="col-lg-8 col-md-12 col-sm-10 bio rounded">
-      <% if (bio.bio) { %>
-        <span><%= bio.bio %></span>
+    <div class="col-lg-8 col-md-12 col-sm-10 bio rounded p-3">
+      <% if (bio) { %>
+        
+          <p><%= bio[0].bio %></p>
+        
       <% } else { %>
         <!-- Display a message if the user's bio is empty -->
         <span>No bio available.</span>

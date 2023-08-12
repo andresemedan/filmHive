@@ -54,6 +54,8 @@ module.exports = {
         const projects = await Project.find({user: req.user.id}).populate("user");
 
         const bio = await Bio.find({user: req.user.id})
+        .sort({ createdAt: "desc" })
+        .lean();
 
         const media = await ProfileMedia.find({user: req.user.id})
 
