@@ -5,3 +5,5 @@ document.getElementById('profilePicUpload').addEventListener('change', function(
     // Submit the form when a file is selected
     document.getElementById('profilePicForm').submit();
   })
+
+  

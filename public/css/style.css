@@ -106,8 +106,7 @@ body {
 }
 
 .profile-pic-container .profile-pic-edit input, 
-.profile-pic-container button, .bio-pic-container .bio-pic-edit input, 
-.bio-pic-container button {
+.profile-pic-container button, .bio-pic-container .bio-pic-edit input {
   display: none;
 }
 /* Div around the profile pic edit circle */
@@ -139,7 +138,7 @@ body {
   transform: translate(-50%, -50%);
   background-size: cover;
 }
-.profile-pic-container .profile-pic-edit input + label, .bio-pic-container .bio-pic-edit input + label {
+.profile-pic-container .profile-pic-edit input + label, .bio-button {
   display: inline-block;
   position: relative;
   width: 34px;
@@ -153,11 +152,11 @@ body {
   font-weight: normal;
   transition: all 0.2s ease-in-out;
 }
-.profile-pic-container .profile-pic-edit input + label:hover, .bio-pic-container .bio-pic-edit input + label:hover {
+.profile-pic-container .profile-pic-edit input + label:hover, .bio-pic-container .bio-button:hover {
   background: #f1f1f1;
   border-color: #d6d6d6;
 }
-.profile-pic-container .profile-pic-edit input + label:after, .bio-pic-container .bio-pic-edit input + label:after {
+.profile-pic-container .profile-pic-edit input + label:after, .bio-button:after {
   color: #757575;
   position: absolute;
   top: 10px;
@@ -166,7 +165,7 @@ body {
   text-align: center;
   margin: auto;
 }
-.profile-pic-container .profile-pic-edit input + label i, .bio-pic-container .bio-pic-edit input + label i {
+.profile-pic-container .profile-pic-edit input + label i, .bio-button i {
   position: absolute;
   top: 48%;
   left: 53%;

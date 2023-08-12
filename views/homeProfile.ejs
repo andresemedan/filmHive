@@ -30,28 +30,49 @@
         </div>
       </div>
     </div>
+
 <!-- BIO -->
 <div class="col-md-8 bio-pic-container">
   <div class="bio-pic-upload-container">
     <div class="col-lg-8 col-md-12 col-sm-10 bio rounded">
-      <% if (user.bio) { %>
-        <!-- Display user's bio if it exists -->
-        <span><%= user.bio %></span>
+      <% if (bio.bio) { %>
+        <span><%= bio.bio %></span>
       <% } else { %>
         <!-- Display a message if the user's bio is empty -->
         <span>No bio available.</span>
       <% } %>
+
+
       <div class="bio-pic-edit">
-        <form id="profilePicForm" action="/profilePic" enctype="multipart/form-data" method="POST">
-          <input type="file" class="form-control profile-pic-input" id="profilePicUpload" name="profilePicUpload">
-          <label for="profilePicUpload" class="form-label"><i class="fas fa-edit"></i></label>
-          <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-        </form>
+          <!-- BIO MODAL BUTTON-->
+          <button type="button" class="bio-button profile-pic-input" data-bs-toggle="modal" data-bs-target="#bioModal"><i class="fas fa-edit"></i></button>
       </div>
+
+
+        <!-- Modal -->
+            <div class="modal fade" id="bioModal" tabindex="-1" aria-labelledby="bioExampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="bioExampleModalLabel">Add Bio</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                     <form action="../createBio"  method="POST">
+                        <div class="mb-3">
+                          <textarea class="form-control" id="bio" name="bio"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+                      </form>                    
+                </div>
+                  </div>
+                </div>
+              </div>
+            </div>
     </div>
   </div>
 </div> 
-  </div>
+  
  
     <div class="mt-4">
         <p><strong>User Name</strong>: <%= user.userName %></p>
@@ -208,6 +229,7 @@
 
     </div>
   </div>
+</div>
 </div>
 <script src="/js/homeProfile.js"></script>
 <%- include('partials/footer', { class: 'footer' }) -%>

@@ -5,7 +5,7 @@ const authController = require("../controllers/auth");
 const feedController = require("../controllers/feed")
 const homeController = require("../controllers/home");
 const projectsController = require("../controllers/projects");
-const profileController = require("../controllers/profile")
+const profileController = require("../controllers/profile");
 const { ensureAuth } = require("../middleware/auth");
 
 //Main Routes 
@@ -16,6 +16,11 @@ router.post("/profilePic", upload.single("profilePicUpload"), profileController.
 
 //Add Media
 router.post("/profile/addProfileMedia", upload.fields([{ name: 'imgUpload', maxCount: 1 }, { name: 'fileUpload', maxCount: 1 }]), profileController.addProfileMedia);
+
+// // Add Bio
+router.post("/createBio", (req, res) => {
+    console.log("recieved form subsmission", req.body)
+    profileController.createBio});
 
 //Enable us to get project feed
 router.get("/feed", ensureAuth, feedController.getFeed);

@@ -4,6 +4,7 @@ const Submission = require("../models/Submission");
 const User = require("../models/User");
 const Profile = require("../models/Profile");
 const ProfileMedia = require("../models/ProfileMedia")
+const Bio = require("../models/Bio");
 
 module.exports = {
     getProfile: async (req, res) => {
@@ -52,6 +53,8 @@ module.exports = {
         //Grabbing just the posts of the logged-in user
         const projects = await Project.find({user: req.user.id}).populate("user");
 
+        const bio = await Bio.find({user: req.user.id})
+
         const media = await ProfileMedia.find({user: req.user.id})
 
         const profile = await Profile.find({user: req.user.id})
@@ -63,6 +66,7 @@ module.exports = {
         //Sending post data from mongodb and user data to ejs template
         res.render("homeProfile.ejs", {
           projects: projects,
+          bio: bio, 
           media: media,
           user: req.user,
           profile: profile,
@@ -88,6 +92,19 @@ module.exports = {
       } catch (err) {
         console.log(err);
         res.status(500).send("Something went wrong");
+      }
+    },
+    createBio: async (req, res) => {
+      console.log("here's the controller log", req.body.bio)
+      try {
+        await Bio.create({
+          bio: req.body.bio,
+          user: req.user.id,
+        });
+        console.log("Bio has been added!");
+        res.redirect("/profile/homeProfile");
+      } catch (err) {
+        console.log(err);
       }
     },  
     addProfileMedia: async (req, res) => {
