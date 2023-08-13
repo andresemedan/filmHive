@@ -32,18 +32,23 @@
     </div>
 
 <!-- BIO -->
-<div class="col-md-8 bio-pic-container">
+<div class="col-md-8 bio-container">
   <div class="bio-pic-upload-container">
     <div class="col-lg-8 col-md-12 col-sm-10 bio rounded p-3">
-      <% if (bio) { %>
-        
-          <p><%= bio[0].bio %></p>
-        
-      <% } else { %>
-        <!-- Display a message if the user's bio is empty -->
-        <span>No bio available.</span>
-      <% } %>
 
+      <% let userHasBio = false %>
+        <% for (i = 0; i < bio.length; i++) { %>
+          <% if (bio[i].user._id.toString() === user._id.toString()) { %>
+            <p><%= bio[0].bio %></p>
+            <% userHasBio = true %>
+            <% break %>
+          <% } %>
+        <% } %>
+  
+        <% if (!userHasBio) { %>
+<!-- Display a placeholder or default image if user does not have a profile picture -->
+            <span>No bio available.</span>
+        <% } %>
 
       <div class="bio-pic-edit">
           <!-- BIO MODAL BUTTON-->
