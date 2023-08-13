@@ -28,7 +28,13 @@ module.exports = {
             user: req.params.id,
           }).populate("user").populate("project").sort({ createdAt: "desc" }).lean();
 
-          const media = await ProfileMedia.find({user: req.params.id}).populate('user')
+        const media = await ProfileMedia.find({user: req.params.id}).populate('user')
+
+        // This bio varable needs to find the Bio based on the User using the params not the req.user.
+        // This is because the profile we are on has the params of the user we are trying to access the bio of
+        const bio = await Bio.find({user: req.params.id})
+          .sort({ createdAt: "desc" })
+          .lean();
   
         //Sending post data from mongodb and user data to ejs template
         res.render("profile.ejs", {
@@ -40,6 +46,7 @@ module.exports = {
           profile: profile,
           submissions: submissions,
           media: media,
+          bio: bio,
         });
       } catch (err) {
         console.log(err);

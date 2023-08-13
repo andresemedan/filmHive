@@ -1,7 +1,8 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row mt-5">
-      <div class="col">
+    <div class="col-md-4 profile-pic-container mb-3">
+      <div class="profile-pic-upload-container">
         <% if (profile && profile.length > 0 && profile[0].user && profile[0].user._id && profile[0].user._id.toString() === viewedUserId.toString() && profile[0].profilePic) { %>
 
             <div class="profile-pic-container mb-4">
@@ -10,6 +11,25 @@
               </div>
             </div>
         <% } %>
+          </div>
+      </div>
+
+        <!-- BIO -->
+        <div class="col-md-8 bio-pic-container">
+          <div class="bio-pic-upload-container">
+            <div class="col-lg-8 col-md-12 col-sm-10 bio rounded p-3">
+              <%if(bio && bio.length > 0 && bio[0].user && bio[0].user._id && bio[0].user._id.toString() === viewedUserId.toString()) {%> 
+
+                  <p><%= bio[0].bio %></p>
+
+              <% } else { %>
+                <!-- Display a message if the user's bio is empty -->
+                <p>No bio available.</p>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      
       
       <div>
           <p><strong>User Name</strong>: <%= userProfile.userName %></p>
@@ -70,5 +90,5 @@
     </div>
     </div>
   </div>
-</div>
+
 <%- include('partials/footer', { class: 'footer' }) -%>

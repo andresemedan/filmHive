@@ -92,7 +92,6 @@ body {
 /* BIO SECTION */
 
 .bio {
-  border: 1px solid #D5D0CA;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
   min-height: 10rem;
   background-color: #fff;
@@ -106,7 +105,7 @@ body {
 }
 
 .profile-pic-container .profile-pic-edit input, 
-.profile-pic-container button, .bio-pic-container .bio-pic-edit input {
+.profile-pic-container button, .bio-container .bio-pic-edit input {
   display: none;
 }
 /* Div around the profile pic edit circle */
@@ -152,7 +151,7 @@ body {
   font-weight: normal;
   transition: all 0.2s ease-in-out;
 }
-.profile-pic-container .profile-pic-edit input + label:hover, .bio-pic-container .bio-button:hover {
+.profile-pic-container .profile-pic-edit input + label:hover, .bio-container .bio-button:hover {
   background: #f1f1f1;
   border-color: #d6d6d6;
 }
