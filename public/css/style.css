@@ -181,6 +181,26 @@ body {
 .modal-body .mediaImg {
   width: 100%;
 }
+
+/* USER NAME + BUTTONS SECTION */
+.buttons-name-row {
+  display: flex;
+  justify-content: space-between;
+}
+.userNameEmail {
+  display: inline;
+}
+
+.homeProfileButtons {
+  display: inline;
+}
+
+.homeProfileButtonsItem {
+  margin-right: 3px;
+}
+
+
+
 /* Notifications */
 
 .block {

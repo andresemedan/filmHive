@@ -1,6 +1,6 @@
 <%- include('partials/header') -%>
 <div class="container">
-  <div class="row mt-5">
+  <div class="row mt-2">
     <div class="col-md-4 profile-pic-container mb-3">
       <div class="profile-pic-upload-container">
         <% let userHasProfilePic = false %>
@@ -80,21 +80,27 @@
   </div>
 </div> 
   
- 
-    <div class="mt-4">
-        <p><strong>User Name</strong>: <%= user.userName %></p>
-        <p><strong>Email</strong>: <%= user.email %></p>
+  <div class="row buttons-name-row">
+    <div class="col-md-6">
+    <div class="userNameEmail mt-4">
+        <span><strong>User Name</strong>: <%= user.userName %></span> <br/>
+        <span><strong>Email</strong>: <%= user.email %></span>
     </div>
+  </div>
 
-    <!-- CREATE PROJECT -->
-    <div class="justify-content-center mt-5">
-      <a class="btn btn-primary" href="/makeProject">Create a project</a>
-    </div>  
+  <div class="col-md-6">
+    <!-- BUTTONS DIV -->
+    <div class="homeProfileButtons d-flex">
+    
+      <!-- CREATE PROJECT -->
+    
+      <a class="btn btn-primary mt-2 homeProfileButtonsItem" href="/makeProject">Create a project</a>
+     
 
     
     
     <!-- NOTIFICATIONS OFFCANVAS -->
-    <button class="btn btn-primary mt-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+    <button class="btn btn-primary mt-2 homeProfileButtonsItem" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
       Notifications
     </button>
     
@@ -120,7 +126,7 @@
       </div>
       
       <!-- ADD MEDIA -->
-      <button class="btn btn-primary block mt-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop2" aria-controls="staticBackdrop">
+      <button class="btn btn-primary block mt-2 homeProfileButtonsItem" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop2" aria-controls="staticBackdrop">
         Add Media
       </button>
       
@@ -153,6 +159,8 @@
         </div>
       </div>
     </div>
+  </div>
+  </div>
 
 
 <!-- MY PROJECTS -->
@@ -222,6 +230,7 @@
           <% } %>
         </div>
       </div>
+    </div>
       
 
       </div>
