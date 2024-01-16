@@ -113,7 +113,7 @@
               <% if(projectMedia[i].file) { %>
                 <a type="button" class="btn btn-script btn-outline-success mt-2" href="<%= projectMedia[i].file %>"><%= projectMedia[i].title %></a>
                 <% } else { %>
-                  <img class="mediaImg rounded shadow-sm mt-2" src="<%= projectMedia[i].image %>" alt="Profile Picture">
+                  <img class="projMediaImg rounded shadow-sm mt-2" src="<%= projectMedia[i].image %>" alt="Project Media">
                   <% } %>
             </div>
           </a>
@@ -141,7 +141,6 @@
       >
       <div class="d-grid gap-2 col-2">
       <button type="submit" class="btn btn-delete btn-danger fa fa-trash mt-5"></button>
-        <!-- <button class="btn btn-primary fa fa-trash" type="submit"></button> -->
       </div>
       </form>
       <%}%>
