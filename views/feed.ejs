@@ -22,13 +22,18 @@
                 <span class="">Created by: <%= projects[i].user.userName %></span>
                 </div>
               </div>
-
-                <div class="card-submissions">
+              
+                <div class="card-submissions p-5">
+                  <h6 class="card-title mb-4">Cast & Crew needed</h6>
                   <ul>
-                    <li>hi</li>
-                    <li>hi there 2</li>
+                    <!-- Need to sort this out to have each card present the needed roles for this project
+                    Currently it is only has the submitted roles, which is not what we need, but I wanted to check if it was sending data. It is.  -->
+                    <li> <%= submissions[i].role %> </li>
+                    <li> Wanted Role 2 </li>
                   </ul>
                </div>
+
+
               </div>
             </div>
           </div>
