@@ -41,6 +41,10 @@ body {
   border-color: rgb(189, 2, 2);
 }
 
+.dynamic-btn {
+  background: rgb(255, 93, 93);
+}
+
 .fa-trash {
   background-color: red;
 }
@@ -217,6 +221,13 @@ body {
 .content-width-div {
   display: inline-block;
 }
+
+/* ------------------------------- CREATE PROJECT --------------------------------------------- */
+
+
+
+
+
 
 /* ------------------------------- PROJECT PAGE (MYPROJECT) ----------------------------------- */
 

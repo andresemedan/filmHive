@@ -25,6 +25,14 @@ const ProjectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  rolesWanted: {
+    type: [String],
+    required: true,
+  },
+  rolesDescription: {
+    type: [String],
+    required: true,
+  },
   likes: {
     type: Number,
     required: true,

@@ -121,6 +121,8 @@ module.exports = {
         image: imgResult ? imgResult.secure_url : null,
         cloudinaryId: imgResult ? imgResult.public_id : null,
         caption: req.body.caption,
+        rolesWanted: req.body.rolesWanted,
+        rolesDescription: req.body.rolesDescription,
         likes: 0,
         user: req.user.id,
       });
