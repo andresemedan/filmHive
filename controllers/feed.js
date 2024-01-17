@@ -9,7 +9,7 @@ module.exports = {
         try {
           const projects = await Project.find().sort({ createdAt: "desc" }).lean().populate('user');
           const submissions = await Submission.find().populate("user");
-          console.log(submissions)
+          console.log(projects)
           res.render("feed.ejs", { projects: projects, user: req.user, submissions: submissions});
         } catch (err) {
           console.log(err);
